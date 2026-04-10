@@ -2,10 +2,14 @@ import { ConflictException, Injectable } from '@nestjs/common';
 import { PrismaService } from '@/src/core/prisma/prisma.service';
 import { CreateUserInput } from '@/src/modules/auth/account/inputs/create-user.input';
 import { hash } from 'argon2';
+import { VerificationService } from '../verification/verification.service';
 
 @Injectable()
 export class AccountService {
-  public constructor(private readonly prismaService: PrismaService) {}
+  public constructor(
+    private readonly prismaService: PrismaService,
+    private readonly verificationService: VerificationService,
+  ) {}
 
   public async me(id: string) {
     const user = await this.prismaService.user.findUnique({
@@ -39,6 +43,7 @@ export class AccountService {
         name: username,
       }
     })
-    return user;
+
+    return await this.verificationService.sendVerificationToken(user);
   }
 }

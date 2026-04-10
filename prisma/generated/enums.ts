@@ -9,7 +9,8 @@
 * 🟢 You can import this file directly.
 */
 
+export const TokenType = {
+  EMAIL_VERIFY: 'EMAIL_VERIFY'
+} as const
 
-
-// This file is empty because there are no enums in the schema.
-export {}
+export type TokenType = (typeof TokenType)[keyof typeof TokenType]
