@@ -1,4 +1,4 @@
-import { ConflictException, Injectable, InternalServerErrorException, NotFoundException, UnauthorizedException } from '@nestjs/common';
+import { BadRequestException, ConflictException, Injectable, InternalServerErrorException, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import type { Request } from 'express';
 import { PrismaService } from '@/src/core/prisma/prisma.service';
 import { LoginInput } from '../session/inputs/login.input';
@@ -7,6 +7,7 @@ import { ConfigService } from '@nestjs/config';
 import { getSessionMetadata } from '@/src/shared/utils/session-metadata.util';
 import { RedisService } from '@/src/core/redis/redis.service';
 import { destroySession, saveSession } from '@/src/shared/utils/session.util';
+import { VerificationService } from '../verification/verification.service';
 
 @Injectable()
 export class SessionService {
@@ -14,6 +15,7 @@ export class SessionService {
     private readonly prismaService: PrismaService,
     private readonly configService: ConfigService,
     private readonly redisService: RedisService,
+    private readonly verificationService: VerificationService,
   ) {}
 
   public async findByUser(req: Request) {
@@ -83,6 +85,13 @@ export class SessionService {
 
     if (!isPasswordValid) {
       throw new UnauthorizedException('Invalid password');
+    }
+
+    if (!user.isActive) {
+      await this.verificationService.sendVerificationToken(user);
+      throw new BadRequestException(
+        'Email address not verified. A verification link was sent to your inbox — please check your spam folder if you did not receive it.'
+      )
     }
 
     const metadata = getSessionMetadata(req, userAgent);

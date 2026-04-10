@@ -16,13 +16,13 @@ import {
 interface EmailVerificationTemplateProps {
   domain: string;
   token: string;
-  appName?: string;
+  appName: string;
 }
 
 export function EmailVerificationTemplate({
   domain,
   token,
-  appName = 'Twich',
+  appName,
 }: EmailVerificationTemplateProps) {
   const verificationLink = `${domain}/account/verify?token=${token}`;
 

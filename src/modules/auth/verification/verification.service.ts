@@ -67,7 +67,10 @@ export class VerificationService {
       true,
     )
 
-    console.log(verificationToken);
+    await this.mailService.sendVerificationToken(
+      user.email, 
+      verificationToken.token,
+    );
 
     return true;
   }
