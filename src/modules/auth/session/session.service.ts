@@ -6,6 +6,7 @@ import { verify } from 'argon2';
 import { ConfigService } from '@nestjs/config';
 import { getSessionMetadata } from '@/src/shared/utils/session-metadata.util';
 import { RedisService } from '@/src/core/redis/redis.service';
+import { destroySession, saveSession } from '@/src/shared/utils/session.util';
 
 @Injectable()
 export class SessionService {
@@ -86,37 +87,11 @@ export class SessionService {
 
     const metadata = getSessionMetadata(req, userAgent);
 
-    return new Promise((resolve, reject) => {
-      req.session.createdAt = new Date();
-      req.session.userId = user.id;
-      req.session.metadata = metadata;
-      req.session.save(err => {
-        if (err) {
-          return reject(
-            new InternalServerErrorException(
-              'Failed to create session'
-            )
-          );
-        }
-        resolve(user);
-      })
-    })
+    return saveSession(req, user, metadata);
   }
 
   public async logout(req: Request) {
-    return new Promise((resolve, reject) => {
-      req.session.destroy(err => {
-        if (err) {
-          reject(
-            new InternalServerErrorException(
-              'Failed to delete session'
-            )
-          );
-        }
-        req.res?.clearCookie(this.configService.getOrThrow<string>('SESSION_NAME'));
-        resolve(true);
-      })
-    })
+    return destroySession(req, this.configService);
   }
 
   public async clearSession(req: Request) {
