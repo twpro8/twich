@@ -44,4 +44,5 @@ enum TokenType {
   @@map("token_types")
 
   EMAIL_VERIFY
+  PASSWORD_RESET
 }

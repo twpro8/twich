@@ -3,6 +3,8 @@ import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { render } from '@react-email/render';
 import { EmailVerificationTemplate } from './templates/email-verification.template';
+import { PasswordRecoveryTemplate } from './templates/password-recovery.template';
+import type { SessionMetadata } from '@/src/shared/types/session-metadata.types';
 
 @Injectable()
 export class MailService {
@@ -20,6 +22,22 @@ export class MailService {
     }));
 
     return this.sendMail(email, 'Email Verification', html);
+  }
+
+  public async sendPasswordRecoveryToken(
+    email: string, 
+    token: string, 
+    metadata: SessionMetadata,
+  ) {
+    const domain = this.configService.getOrThrow<string>('ALLOWED_ORIGIN');
+    const html = await render(PasswordRecoveryTemplate({ 
+      domain,
+      token,
+      appName: this.configService.getOrThrow<string>('APP_NAME'),
+      metadata,
+    }));
+
+    return this.sendMail(email, 'Password Recovery', html);
   }
 
   private sendMail(email: string, subject: string, html: string) {
