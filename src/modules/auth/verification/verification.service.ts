@@ -26,7 +26,7 @@ export class VerificationService {
     const existingToken = await this.prismaService.token.findUnique({
       where: {
         token,
-        type: TokenType.EMAIL_VERIFY,
+        type: TokenType.EMAIL_VERIFICATION,
       }
     });
 
@@ -63,7 +63,7 @@ export class VerificationService {
     const verificationToken = await generateVerificationToken(
       this.prismaService, 
       user, 
-      TokenType.EMAIL_VERIFY, 
+      TokenType.EMAIL_VERIFICATION, 
       true,
     )
 

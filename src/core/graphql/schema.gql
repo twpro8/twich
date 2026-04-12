@@ -2,6 +2,12 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+input AccountDeactivationInput {
+  code: String
+  email: String!
+  password: String!
+}
+
 type AuthResultModel {
   message: String
   user: UserModel
@@ -45,6 +51,7 @@ input LoginInput {
 type Mutation {
   clearSessionCookie: Boolean!
   createUser(data: CreateUserInput!): Boolean!
+  deactivateAccount(data: AccountDeactivationInput!): AuthResultModel!
   disableTotp: Boolean!
   enableTotp(data: EnableTotpInput!): Boolean!
   loginUser(data: LoginInput!): AuthResultModel!

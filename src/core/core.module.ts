@@ -12,6 +12,7 @@ import { VerificationModule } from '../modules/auth/verification/verification.mo
 import { MailModule } from '../modules/libs/mail/mail.module';
 import { PasswordRecoveryModule } from '../modules/auth/password-recovery/password-recovery.module';
 import { TotpModule } from '../modules/auth/totp/totp.module';
+import { DeactivationModule } from '../modules/auth/deactivation/deactivation.module';
 
 @Module({
   imports: [
@@ -33,6 +34,7 @@ import { TotpModule } from '../modules/auth/totp/totp.module';
     VerificationModule,
     PasswordRecoveryModule,
     TotpModule,
+    DeactivationModule,
   ],
 })
 export class CoreModule {}

@@ -20,6 +20,8 @@ model User {
   bio String?
   isVerified Boolean @default(false) @map("is_verified")
   isActive Boolean @default(false) @map("is_active")
+  isDeactivated Boolean @default(false) @map("is_deactivated")
+  deactivatedAt DateTime? @map("deactivated_at")
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
   totpKey String? @map("totp_key")
@@ -44,6 +46,7 @@ model Token {
 enum TokenType {
   @@map("token_types")
 
-  EMAIL_VERIFY
+  EMAIL_VERIFICATION
   PASSWORD_RESET
+  ACCOUNT_DEACTIVATION
 }

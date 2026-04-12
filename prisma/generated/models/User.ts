@@ -34,6 +34,8 @@ export type UserMinAggregateOutputType = {
   bio: string | null
   isVerified: boolean | null
   isActive: boolean | null
+  isDeactivated: boolean | null
+  deactivatedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
   totpKey: string | null
@@ -49,6 +51,8 @@ export type UserMaxAggregateOutputType = {
   bio: string | null
   isVerified: boolean | null
   isActive: boolean | null
+  isDeactivated: boolean | null
+  deactivatedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
   totpKey: string | null
@@ -64,6 +68,8 @@ export type UserCountAggregateOutputType = {
   bio: number
   isVerified: number
   isActive: number
+  isDeactivated: number
+  deactivatedAt: number
   createdAt: number
   updatedAt: number
   totpKey: number
@@ -81,6 +87,8 @@ export type UserMinAggregateInputType = {
   bio?: true
   isVerified?: true
   isActive?: true
+  isDeactivated?: true
+  deactivatedAt?: true
   createdAt?: true
   updatedAt?: true
   totpKey?: true
@@ -96,6 +104,8 @@ export type UserMaxAggregateInputType = {
   bio?: true
   isVerified?: true
   isActive?: true
+  isDeactivated?: true
+  deactivatedAt?: true
   createdAt?: true
   updatedAt?: true
   totpKey?: true
@@ -111,6 +121,8 @@ export type UserCountAggregateInputType = {
   bio?: true
   isVerified?: true
   isActive?: true
+  isDeactivated?: true
+  deactivatedAt?: true
   createdAt?: true
   updatedAt?: true
   totpKey?: true
@@ -199,6 +211,8 @@ export type UserGroupByOutputType = {
   bio: string | null
   isVerified: boolean
   isActive: boolean
+  isDeactivated: boolean
+  deactivatedAt: Date | null
   createdAt: Date
   updatedAt: Date
   totpKey: string | null
@@ -235,6 +249,8 @@ export type UserWhereInput = {
   bio?: Prisma.StringNullableFilter<"User"> | string | null
   isVerified?: Prisma.BoolFilter<"User"> | boolean
   isActive?: Prisma.BoolFilter<"User"> | boolean
+  isDeactivated?: Prisma.BoolFilter<"User"> | boolean
+  deactivatedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   totpKey?: Prisma.StringNullableFilter<"User"> | string | null
@@ -251,6 +267,8 @@ export type UserOrderByWithRelationInput = {
   bio?: Prisma.SortOrderInput | Prisma.SortOrder
   isVerified?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  isDeactivated?: Prisma.SortOrder
+  deactivatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   totpKey?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -270,6 +288,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   bio?: Prisma.StringNullableFilter<"User"> | string | null
   isVerified?: Prisma.BoolFilter<"User"> | boolean
   isActive?: Prisma.BoolFilter<"User"> | boolean
+  isDeactivated?: Prisma.BoolFilter<"User"> | boolean
+  deactivatedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   totpKey?: Prisma.StringNullableFilter<"User"> | string | null
@@ -286,6 +306,8 @@ export type UserOrderByWithAggregationInput = {
   bio?: Prisma.SortOrderInput | Prisma.SortOrder
   isVerified?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  isDeactivated?: Prisma.SortOrder
+  deactivatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   totpKey?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -307,6 +329,8 @@ export type UserScalarWhereWithAggregatesInput = {
   bio?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   isVerified?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   isActive?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
+  isDeactivated?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
+  deactivatedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   totpKey?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
@@ -322,6 +346,8 @@ export type UserCreateInput = {
   bio?: string | null
   isVerified?: boolean
   isActive?: boolean
+  isDeactivated?: boolean
+  deactivatedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   totpKey?: string | null
@@ -338,6 +364,8 @@ export type UserUncheckedCreateInput = {
   bio?: string | null
   isVerified?: boolean
   isActive?: boolean
+  isDeactivated?: boolean
+  deactivatedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   totpKey?: string | null
@@ -354,6 +382,8 @@ export type UserUpdateInput = {
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isDeactivated?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   totpKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -370,6 +400,8 @@ export type UserUncheckedUpdateInput = {
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isDeactivated?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   totpKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -386,6 +418,8 @@ export type UserCreateManyInput = {
   bio?: string | null
   isVerified?: boolean
   isActive?: boolean
+  isDeactivated?: boolean
+  deactivatedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   totpKey?: string | null
@@ -401,6 +435,8 @@ export type UserUpdateManyMutationInput = {
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isDeactivated?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   totpKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -416,6 +452,8 @@ export type UserUncheckedUpdateManyInput = {
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isDeactivated?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   totpKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -431,6 +469,8 @@ export type UserCountOrderByAggregateInput = {
   bio?: Prisma.SortOrder
   isVerified?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  isDeactivated?: Prisma.SortOrder
+  deactivatedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   totpKey?: Prisma.SortOrder
@@ -446,6 +486,8 @@ export type UserMaxOrderByAggregateInput = {
   bio?: Prisma.SortOrder
   isVerified?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  isDeactivated?: Prisma.SortOrder
+  deactivatedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   totpKey?: Prisma.SortOrder
@@ -461,6 +503,8 @@ export type UserMinOrderByAggregateInput = {
   bio?: Prisma.SortOrder
   isVerified?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
+  isDeactivated?: Prisma.SortOrder
+  deactivatedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   totpKey?: Prisma.SortOrder
@@ -481,6 +525,10 @@ export type NullableStringFieldUpdateOperationsInput = {
 
 export type BoolFieldUpdateOperationsInput = {
   set?: boolean
+}
+
+export type NullableDateTimeFieldUpdateOperationsInput = {
+  set?: Date | string | null
 }
 
 export type DateTimeFieldUpdateOperationsInput = {
@@ -513,6 +561,8 @@ export type UserCreateWithoutTokensInput = {
   bio?: string | null
   isVerified?: boolean
   isActive?: boolean
+  isDeactivated?: boolean
+  deactivatedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   totpKey?: string | null
@@ -528,6 +578,8 @@ export type UserUncheckedCreateWithoutTokensInput = {
   bio?: string | null
   isVerified?: boolean
   isActive?: boolean
+  isDeactivated?: boolean
+  deactivatedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   totpKey?: string | null
@@ -559,6 +611,8 @@ export type UserUpdateWithoutTokensInput = {
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isDeactivated?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   totpKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -574,6 +628,8 @@ export type UserUncheckedUpdateWithoutTokensInput = {
   bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isDeactivated?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   totpKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -620,6 +676,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   bio?: boolean
   isVerified?: boolean
   isActive?: boolean
+  isDeactivated?: boolean
+  deactivatedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   totpKey?: boolean
@@ -637,6 +695,8 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   bio?: boolean
   isVerified?: boolean
   isActive?: boolean
+  isDeactivated?: boolean
+  deactivatedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   totpKey?: boolean
@@ -652,6 +712,8 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   bio?: boolean
   isVerified?: boolean
   isActive?: boolean
+  isDeactivated?: boolean
+  deactivatedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   totpKey?: boolean
@@ -667,12 +729,14 @@ export type UserSelectScalar = {
   bio?: boolean
   isVerified?: boolean
   isActive?: boolean
+  isDeactivated?: boolean
+  deactivatedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   totpKey?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "password" | "username" | "name" | "avatar" | "bio" | "isVerified" | "isActive" | "createdAt" | "updatedAt" | "totpKey", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "password" | "username" | "name" | "avatar" | "bio" | "isVerified" | "isActive" | "isDeactivated" | "deactivatedAt" | "createdAt" | "updatedAt" | "totpKey", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tokens?: boolean | Prisma.User$tokensArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -695,6 +759,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     bio: string | null
     isVerified: boolean
     isActive: boolean
+    isDeactivated: boolean
+    deactivatedAt: Date | null
     createdAt: Date
     updatedAt: Date
     totpKey: string | null
@@ -1131,6 +1197,8 @@ export interface UserFieldRefs {
   readonly bio: Prisma.FieldRef<"User", 'String'>
   readonly isVerified: Prisma.FieldRef<"User", 'Boolean'>
   readonly isActive: Prisma.FieldRef<"User", 'Boolean'>
+  readonly isDeactivated: Prisma.FieldRef<"User", 'Boolean'>
+  readonly deactivatedAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly totpKey: Prisma.FieldRef<"User", 'String'>
