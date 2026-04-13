@@ -98,9 +98,9 @@ type SessionMetadataModel {
 
 type SessionModel {
   createdAt: String!
-  id: ID!
+  id: String!
   metadata: SessionMetadataModel!
-  userId: ID!
+  userId: String!
 }
 
 type TotpModel {
