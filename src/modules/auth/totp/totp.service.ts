@@ -7,9 +7,9 @@ import type { EnableTotpInput } from './inputs/enable-totp.input';
 
 @Injectable()
 export class TotpService {
-  public constructor(private readonly prismaService: PrismaService) {}
+  constructor(private readonly prismaService: PrismaService) {}
 
-  public async generateTotpKey(user: User) {
+  async generateTotpKey(user: User) {
     const totp = new TOTP({
       issuer: 'Twich',
       label: user.email,
@@ -25,7 +25,7 @@ export class TotpService {
     return { qrCodeUrl, secret: otpSecret };
   }
 
-  public async enableTotp(user: User, input: EnableTotpInput) {
+  async enableTotp(user: User, input: EnableTotpInput) {
     const { secret, code } = input;
 
     const totp = new TOTP({
@@ -53,7 +53,7 @@ export class TotpService {
     return true;
   }
 
-  public async disableTotp(user: User) {
+  async disableTotp(user: User) {
     await this.prismaService.user.update({
       where: {
         id: user.id,

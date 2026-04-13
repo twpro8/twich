@@ -1,5 +1,9 @@
-import { NewPasswordInput } from "@/src/modules/auth/password-recovery/inputs/new-password.input";
-import { ValidatorConstraint, type ValidationArguments, type ValidatorConstraintInterface } from "class-validator";
+import { NewPasswordInput } from '@/src/modules/auth/password-recovery/inputs/new-password.input';
+import {
+  ValidatorConstraint,
+  type ValidationArguments,
+  type ValidatorConstraintInterface,
+} from 'class-validator';
 
 @ValidatorConstraint({ name: 'IsPasswordMatching', async: false })
 export class IsPasswordMatchingConstraint implements ValidatorConstraintInterface {
@@ -9,6 +13,6 @@ export class IsPasswordMatchingConstraint implements ValidatorConstraintInterfac
   }
 
   public defaultMessage(ValidationArguments?: ValidationArguments) {
-    return 'Passwords do not match'
+    return 'Passwords do not match';
   }
 }

@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
-import { VerificationService } from './verification.service';
-import { VerificationResolver } from './verification.resolver';
 import { MailModule } from '../../libs/mail/mail.module';
+import { VerificationResolver } from './verification.resolver';
+import { VerificationService } from './verification.service';
 
 @Module({
   imports: [MailModule],

@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { DeactivationService } from './deactivation.service';
 import { DeactivationResolver } from './deactivation.resolver';
+import { DeactivationService } from './deactivation.service';
 
 @Module({
   providers: [DeactivationResolver, DeactivationService],

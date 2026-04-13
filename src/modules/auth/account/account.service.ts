@@ -1,38 +1,44 @@
-import { BadRequestException, ConflictException, Injectable } from '@nestjs/common';
+import { User } from '@/prisma/generated/client';
 import { PrismaService } from '@/src/core/prisma/prisma.service';
 import { CreateUserInput } from '@/src/modules/auth/account/inputs/create-user.input';
+import {
+  BadRequestException,
+  ConflictException,
+  Injectable,
+} from '@nestjs/common';
 import { hash, verify } from 'argon2';
 import { VerificationService } from '../verification/verification.service';
 import { ChangeEmailInput } from './inputs/change-email.input';
-import { User } from '@/prisma/generated/client';
 import { ChangePasswordInput } from './inputs/change-password.input';
 
 @Injectable()
 export class AccountService {
-  public constructor(
+  constructor(
     private readonly prismaService: PrismaService,
     private readonly verificationService: VerificationService,
   ) {}
 
-  public async me(id: string) {
+  async me(id: string) {
     const user = await this.prismaService.user.findUnique({
-      where: { id }
+      where: { id },
     });
     return user;
   }
 
-  public async create(input: CreateUserInput) {
+  async create(input: CreateUserInput) {
     const { username, email, password } = input;
 
-    const existingUsername =
-      await this.prismaService.user.findUnique({ where: { username } });
+    const existingUsername = await this.prismaService.user.findUnique({
+      where: { username },
+    });
 
     if (existingUsername) {
       throw new ConflictException('Username already exists');
     }
 
-    const existingEmail =
-      await this.prismaService.user.findUnique({ where: { email } });
+    const existingEmail = await this.prismaService.user.findUnique({
+      where: { email },
+    });
 
     if (existingEmail) {
       throw new ConflictException('Email already exists');
@@ -44,13 +50,13 @@ export class AccountService {
         email,
         password: await hash(password),
         name: username,
-      }
-    })
+      },
+    });
 
     return await this.verificationService.sendVerificationToken(user);
   }
 
-  public async changeEmail(user: User, input: ChangeEmailInput) {
+  async changeEmail(user: User, input: ChangeEmailInput) {
     await this.prismaService.user.update({
       where: { id: user.id },
       data: { email: input.email },
@@ -59,8 +65,8 @@ export class AccountService {
     return true;
   }
 
-  public async changePassword(user: User, input: ChangePasswordInput) {
-    if (!await verify(user.password, input.password)) {
+  async changePassword(user: User, input: ChangePasswordInput) {
+    if (!(await verify(user.password, input.password))) {
       throw new BadRequestException('Incorrect password');
     }
     await this.prismaService.user.update({

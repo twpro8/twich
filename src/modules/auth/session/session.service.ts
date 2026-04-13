@@ -1,25 +1,31 @@
-import { BadRequestException, ConflictException, Injectable, InternalServerErrorException, NotFoundException, UnauthorizedException } from '@nestjs/common';
-import type { Request } from 'express';
 import { PrismaService } from '@/src/core/prisma/prisma.service';
-import { LoginInput } from '../session/inputs/login.input';
-import { verify } from 'argon2';
-import { ConfigService } from '@nestjs/config';
-import { getSessionMetadata } from '@/src/shared/utils/session-metadata.util';
 import { RedisService } from '@/src/core/redis/redis.service';
+import { getSessionMetadata } from '@/src/shared/utils/session-metadata.util';
 import { destroySession, saveSession } from '@/src/shared/utils/session.util';
-import { VerificationService } from '../verification/verification.service';
+import {
+  BadRequestException,
+  ConflictException,
+  Injectable,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { verify } from 'argon2';
+import type { Request } from 'express';
 import { TOTP } from 'otpauth';
+import { LoginInput } from '../session/inputs/login.input';
+import { VerificationService } from '../verification/verification.service';
 
 @Injectable()
 export class SessionService {
-  public constructor(
+  constructor(
     private readonly prismaService: PrismaService,
     private readonly configService: ConfigService,
     private readonly redisService: RedisService,
     private readonly verificationService: VerificationService,
   ) {}
 
-  public async findByUser(req: Request) {
+  async findByUser(req: Request) {
     const userId = req.session.userId;
 
     if (!userId) {
@@ -32,7 +38,7 @@ export class SessionService {
 
     for (const key of keys) {
       const sessionData = await this.redisService.client.get(key);
-      
+
       if (sessionData) {
         const parsed = JSON.parse(sessionData);
 
@@ -50,11 +56,11 @@ export class SessionService {
     return userSessions.filter(session => session.id !== req.session.id);
   }
 
-  public async findCurrentSession(req: Request) {
+  async findCurrentSession(req: Request) {
     const sessionId = req.session.id;
 
     const sessionData = await this.redisService.client.get(
-      `${this.configService.getOrThrow<string>('SESSION_FOLDER')}${sessionId}`
+      `${this.configService.getOrThrow<string>('SESSION_FOLDER')}${sessionId}`,
     );
 
     if (!sessionData) {
@@ -66,17 +72,14 @@ export class SessionService {
     return { ...parsed, id: sessionId };
   }
 
-  public async login(req: Request, input: LoginInput, userAgent: string) {
+  async login(req: Request, input: LoginInput, userAgent: string) {
     const { login, password, code } = input;
 
     const user = await this.prismaService.user.findFirst({
       where: {
-        OR: [
-          { username: { equals: login } },
-          { email: { equals: login } },
-        ]
+        OR: [{ username: { equals: login } }, { email: { equals: login } }],
       },
-    })
+    });
 
     if (!user) {
       throw new NotFoundException('User not found');
@@ -91,15 +94,15 @@ export class SessionService {
     if (!user.isActive) {
       await this.verificationService.sendVerificationToken(user);
       throw new BadRequestException(
-        'Email address not verified. A verification link was sent to your inbox — please check your spam folder if you did not receive it.'
-      )
+        'Email address not verified. A verification link was sent to your inbox — please check your spam folder if you did not receive it.',
+      );
     }
 
     if (user.totpKey) {
       if (!code) {
         return {
           message: '2FA code is required to complete authorization',
-        }
+        };
       }
       const totp = new TOTP({
         issuer: 'Twich',
@@ -120,24 +123,22 @@ export class SessionService {
     return saveSession(req, user, metadata);
   }
 
-  public async logout(req: Request) {
+  async logout(req: Request) {
     return destroySession(req, this.configService);
   }
 
-  public async clearSession(req: Request) {
-    req.res?.clearCookie(
-      this.configService.getOrThrow<string>('SESSION_NAME')
-    );
+  async clearSession(req: Request) {
+    req.res?.clearCookie(this.configService.getOrThrow<string>('SESSION_NAME'));
     return true;
   }
 
-  public async removeSession(req: Request, id: string) {
+  async removeSession(req: Request, id: string) {
     if (req.session.id === id) {
       throw new ConflictException('Current session cannot be deleted');
     }
 
     await this.redisService.client.del(
-      `${this.configService.getOrThrow<string>('SESSION_FOLDER')}${id}`
+      `${this.configService.getOrThrow<string>('SESSION_FOLDER')}${id}`,
     );
 
     return true;

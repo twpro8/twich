@@ -1,16 +1,12 @@
-import { Field, InputType } from "@nestjs/graphql";
-import { IsNotEmpty, IsString, Length } from "class-validator";
+import { Field, InputType } from '@nestjs/graphql';
+import { Length } from 'class-validator';
 
 @InputType()
 export class EnableTotpInput {
-  @Field(() => String)
-  @IsNotEmpty()
-  @IsString()
+  @Field()
   secret: string;
 
-  @Field(() => String)
-  @IsNotEmpty()
-  @IsString()
+  @Field()
   @Length(6, 6)
   code: string;
 }

@@ -1,12 +1,12 @@
+import type { User } from '@/prisma/generated/client';
+import { CreateUserInput } from '@/src/modules/auth/account/inputs/create-user.input';
+import { UserModel } from '@/src/modules/auth/account/models/user.model';
+import { Authorization } from '@/src/shared/decorators/auth.decorator';
+import { Authorized } from '@/src/shared/decorators/authorized.decorator';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { AccountService } from './account.service';
-import { UserModel } from '@/src/modules/auth/account/models/user.model';
-import { CreateUserInput } from '@/src/modules/auth/account/inputs/create-user.input';
-import { Authorized } from '@/src/shared/decorators/authorized.decorator';
-import { Authorization } from '@/src/shared/decorators/auth.decorator';
 import { ChangeEmailInput } from './inputs/change-email.input';
 import { ChangePasswordInput } from './inputs/change-password.input';
-import type { User } from '@/prisma/generated/client';
 
 @Resolver('Account')
 export class AccountResolver {

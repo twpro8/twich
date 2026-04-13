@@ -1,10 +1,10 @@
-import { TokenType, type User } from "@/prisma/generated/client";
-import { PrismaService } from "@/src/core/prisma/prisma.service";
-import { randomUUID, randomInt } from 'crypto';
+import { TokenType, type User } from '@/prisma/generated/client';
+import { PrismaService } from '@/src/core/prisma/prisma.service';
+import { randomInt, randomUUID } from 'crypto';
 
 export async function generateVerificationToken(
-  prismaService: PrismaService, 
-  user: User, 
+  prismaService: PrismaService,
+  user: User,
   type: TokenType,
   isUUID: boolean = false,
 ) {
@@ -16,7 +16,7 @@ export async function generateVerificationToken(
     token = randomInt(100000, 999999).toString();
   }
 
-  const expiresAt = new Date(new Date().getTime() + 1000 * 60 * 5)  // 5 minutes
+  const expiresAt = new Date(new Date().getTime() + 1000 * 60 * 5); // 5 minutes
 
   const existingToken = await prismaService.token.findFirst({
     where: {

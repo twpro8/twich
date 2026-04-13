@@ -1,13 +1,16 @@
 import type { Request } from 'express';
-import type { SessionMetadata } from '../types/session-metadata.types';
-import DeviceDetector = require('device-detector-js');
 import { lookup } from 'geoip-lite';
 import * as countries from 'i18n-iso-countries';
+import type { SessionMetadata } from '../types/session-metadata.types';
 import { IS_DEV_ENV } from './is-dev.util';
+import DeviceDetector = require('device-detector-js');
 
 countries.registerLocale(require('i18n-iso-countries/langs/en.json'));
 
-export function getSessionMetadata(req: Request, userAgent: string): SessionMetadata {
+export function getSessionMetadata(
+  req: Request,
+  userAgent: string,
+): SessionMetadata {
   const ip = extractIp(req);
   const device = new DeviceDetector().parse(userAgent);
   const location = lookup(ip);
@@ -25,7 +28,7 @@ export function getSessionMetadata(req: Request, userAgent: string): SessionMeta
       type: device.device?.type || '',
     },
     ip,
-  }
+  };
 }
 
 function extractIp(req: Request): string {

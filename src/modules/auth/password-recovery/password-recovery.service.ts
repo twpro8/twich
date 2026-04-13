@@ -1,28 +1,36 @@
-import { PrismaService } from '@/src/core/prisma/prisma.service';
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
-import { MailService } from '../../libs/mail/mail.service';
-import type { Request } from 'express';
-import { ResetPasswordInput } from './inputs/reset-password.input';
-import { generateVerificationToken } from '@/src/shared/utils/generate-token.util';
 import { TokenType } from '@/prisma/generated/enums';
+import { PrismaService } from '@/src/core/prisma/prisma.service';
+import { generateVerificationToken } from '@/src/shared/utils/generate-token.util';
 import { getSessionMetadata } from '@/src/shared/utils/session-metadata.util';
-import type { NewPasswordInput } from './inputs/new-password.input';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { hash } from 'argon2';
+import type { Request } from 'express';
+import { MailService } from '../../libs/mail/mail.service';
+import type { NewPasswordInput } from './inputs/new-password.input';
+import { ResetPasswordInput } from './inputs/reset-password.input';
 
 @Injectable()
 export class PasswordRecoveryService {
-  public constructor(
+  constructor(
     private readonly prismaService: PrismaService,
     private readonly mailService: MailService,
   ) {}
 
-  public async resetPassword(req: Request, input: ResetPasswordInput, userAgent: string) {
+  async resetPassword(
+    req: Request,
+    input: ResetPasswordInput,
+    userAgent: string,
+  ) {
     const { email } = input;
 
     const user = await this.prismaService.user.findUnique({
       where: {
-        email
-      }
+        email,
+      },
     });
 
     if (!user) {
@@ -30,9 +38,9 @@ export class PasswordRecoveryService {
     }
 
     const resetToken = await generateVerificationToken(
-      this.prismaService, 
-      user, 
-      TokenType.PASSWORD_RESET, 
+      this.prismaService,
+      user,
+      TokenType.PASSWORD_RESET,
       true,
     );
 
@@ -42,12 +50,12 @@ export class PasswordRecoveryService {
       user.email,
       resetToken.token,
       metadata,
-    )
+    );
 
     return true;
   }
 
-  public async newPassword(input: NewPasswordInput) {
+  async newPassword(input: NewPasswordInput) {
     // don't be a pussy, add email here pls.
     const { password, token } = input;
 
@@ -55,7 +63,7 @@ export class PasswordRecoveryService {
       where: {
         token,
         type: TokenType.PASSWORD_RESET,
-      }
+      },
     });
 
     if (!existingToken) {

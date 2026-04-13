@@ -1,9 +1,7 @@
 import type { MailerOptions } from '@nestjs-modules/mailer';
 import type { ConfigService } from '@nestjs/config';
 
-export function getMailerConfig(
-  configService: ConfigService,
-): MailerOptions  {
+export function getMailerConfig(configService: ConfigService): MailerOptions {
   return {
     transport: {
       host: configService.getOrThrow<string>('SMTP_HOST'),
@@ -17,5 +15,5 @@ export function getMailerConfig(
     defaults: {
       from: configService.getOrThrow<string>('SMTP_FROM'),
     },
-  }
+  };
 }

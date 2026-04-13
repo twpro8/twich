@@ -1,27 +1,32 @@
-import { PrismaService } from '@/src/core/prisma/prisma.service';
-import { BadGatewayException, BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
-import { MailService } from '../../libs/mail/mail.service';
-import { ConfigService } from '@nestjs/config';
-import type { Request } from 'express';
-import { TokenType } from '@/prisma/generated/enums';
-import { destroySession } from '@/src/shared/utils/session.util';
 import type { User } from '@/prisma/generated/client';
+import { TokenType } from '@/prisma/generated/enums';
+import { PrismaService } from '@/src/core/prisma/prisma.service';
 import { generateVerificationToken } from '@/src/shared/utils/generate-token.util';
 import { getSessionMetadata } from '@/src/shared/utils/session-metadata.util';
-import { AccountDeactivationInput } from './inputs/account-deactivation.input';
+import { destroySession } from '@/src/shared/utils/session.util';
+import {
+  BadGatewayException,
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { verify } from 'argon2';
+import type { Request } from 'express';
+import { MailService } from '../../libs/mail/mail.service';
+import { AccountDeactivationInput } from './inputs/account-deactivation.input';
 
 @Injectable()
 export class DeactivationService {
-  public constructor(
+  constructor(
     private readonly prismaService: PrismaService,
     private readonly mailService: MailService,
     private readonly configService: ConfigService,
   ) {}
 
-  public async deactivateAccount(
-    req: Request, 
-    user: User, 
+  async deactivateAccount(
+    req: Request,
+    user: User,
     input: AccountDeactivationInput,
     userAgent: string,
   ) {
@@ -34,13 +39,14 @@ export class DeactivationService {
     const isPasswordValid = await verify(user.password, password);
 
     if (!isPasswordValid) {
-      throw new BadRequestException('Incorrect password')
+      throw new BadRequestException('Incorrect password');
     }
 
     if (!code) {
       await this.sendDeactivationToken(req, user, userAgent);
       return {
-        message: 'Confirmation is required. A confirmation code was sent to your inbox — please check your spam folder if you did not receive it.',
+        message:
+          'Confirmation is required. A confirmation code was sent to your inbox — please check your spam folder if you did not receive it.',
       };
     }
 
@@ -54,7 +60,7 @@ export class DeactivationService {
       where: {
         token,
         type: TokenType.ACCOUNT_DEACTIVATION,
-      }
+      },
     });
 
     if (!existingToken) {
@@ -75,7 +81,7 @@ export class DeactivationService {
         deactivatedAt: new Date(),
       },
     });
-    
+
     await this.prismaService.token.delete({
       where: {
         id: existingToken.id,
@@ -85,20 +91,20 @@ export class DeactivationService {
     return destroySession(req, this.configService);
   }
 
-  public async sendDeactivationToken(req: Request, user: User, userAgent: string) {
+  async sendDeactivationToken(req: Request, user: User, userAgent: string) {
     const deactivationToken = await generateVerificationToken(
-      this.prismaService, 
-      user, 
-      TokenType.ACCOUNT_DEACTIVATION, 
+      this.prismaService,
+      user,
+      TokenType.ACCOUNT_DEACTIVATION,
       false,
-    )
+    );
 
     const metadata = getSessionMetadata(req, userAgent);
 
     await this.mailService.sendAccountDeactivationToken(
-      user.email, 
+      user.email,
       deactivationToken.token,
-      metadata
+      metadata,
     );
 
     return true;

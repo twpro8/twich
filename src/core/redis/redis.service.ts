@@ -6,17 +6,17 @@ import { createClient, RedisClientType } from 'redis';
 export class RedisService implements OnModuleInit, OnModuleDestroy {
   public client: RedisClientType;
 
-  public constructor(private readonly configService: ConfigService) {
+  constructor(private readonly configService: ConfigService) {
     this.client = createClient({
       url: this.configService.getOrThrow<string>('REDIS_URI'),
     }) as RedisClientType;
   }
 
-  public async onModuleInit() {
+  async onModuleInit() {
     await this.client.connect();
   }
 
-  public async onModuleDestroy() {
+  async onModuleDestroy() {
     await this.client.close();
   }
 }
