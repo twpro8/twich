@@ -6,6 +6,7 @@ import { EmailVerificationTemplate } from './templates/email-verification.templa
 import { PasswordRecoveryTemplate } from './templates/password-recovery.template';
 import type { SessionMetadata } from '@/src/shared/types/session-metadata.types';
 import { AccountDeactivationTemplate } from './templates/account-deactivation.template';
+import { AccountDeletedTemplate } from './templates/account-deleted.template';
 
 @Injectable()
 export class MailService {
@@ -21,7 +22,6 @@ export class MailService {
       token,
       appName: this.configService.getOrThrow<string>('APP_NAME'),
     }));
-
     return this.sendMail(email, 'Email Verification', html);
   }
 
@@ -37,7 +37,6 @@ export class MailService {
       appName: this.configService.getOrThrow<string>('APP_NAME'),
       metadata,
     }));
-
     return this.sendMail(email, 'Password Recovery', html);
   }
 
@@ -51,8 +50,16 @@ export class MailService {
       appName: this.configService.getOrThrow<string>('APP_NAME'),
       metadata,
     }));
-
     return this.sendMail(email, 'Account Deactivation', html);
+  }
+
+  public async sendAccountDeletedMail(email: string) {
+    const domain = this.configService.getOrThrow<string>('ALLOWED_ORIGIN');
+    const html = await render(AccountDeletedTemplate({
+      domain,
+      appName: this.configService.getOrThrow<string>('APP_NAME'),
+    }));
+    return this.sendMail(email, 'Account Deleted', html);
   }
 
   private sendMail(email: string, subject: string, html: string) {
