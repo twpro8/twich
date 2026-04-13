@@ -13,6 +13,15 @@ type AuthResultModel {
   user: UserModel
 }
 
+input ChangeEmailInput {
+  email: String!
+}
+
+input ChangePasswordInput {
+  newPassword: String!
+  password: String!
+}
+
 input CreateUserInput {
   email: String!
   password: String!
@@ -49,6 +58,8 @@ input LoginInput {
 }
 
 type Mutation {
+  changeEmail(data: ChangeEmailInput!): Boolean!
+  changePassword(data: ChangePasswordInput!): Boolean!
   clearSessionCookie: Boolean!
   createUser(data: CreateUserInput!): Boolean!
   deactivateAccount(data: AccountDeactivationInput!): AuthResultModel!
@@ -70,9 +81,9 @@ input NewPasswordInput {
 
 type Query {
   findCurrentSession: SessionModel!
-  findProfile: UserModel!
   findSessionByUser: [SessionModel!]!
   generateTotpKey: TotpModel!
+  me: UserModel!
 }
 
 input ResetPasswordInput {

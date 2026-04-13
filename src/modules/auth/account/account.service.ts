@@ -1,8 +1,11 @@
-import { ConflictException, Injectable } from '@nestjs/common';
+import { BadRequestException, ConflictException, Injectable } from '@nestjs/common';
 import { PrismaService } from '@/src/core/prisma/prisma.service';
 import { CreateUserInput } from '@/src/modules/auth/account/inputs/create-user.input';
-import { hash } from 'argon2';
+import { hash, verify } from 'argon2';
 import { VerificationService } from '../verification/verification.service';
+import { ChangeEmailInput } from './inputs/change-email.input';
+import { User } from '@/prisma/generated/client';
+import { ChangePasswordInput } from './inputs/change-password.input';
 
 @Injectable()
 export class AccountService {
@@ -45,5 +48,25 @@ export class AccountService {
     })
 
     return await this.verificationService.sendVerificationToken(user);
+  }
+
+  public async changeEmail(user: User, input: ChangeEmailInput) {
+    await this.prismaService.user.update({
+      where: { id: user.id },
+      data: { email: input.email },
+    });
+    // todo: send confirmation via email or messenger
+    return true;
+  }
+
+  public async changePassword(user: User, input: ChangePasswordInput) {
+    if (!await verify(user.password, input.password)) {
+      throw new BadRequestException('Incorrect password');
+    }
+    await this.prismaService.user.update({
+      where: { id: user.id },
+      data: { password: await hash(input.newPassword) },
+    });
+    return true;
   }
 }
