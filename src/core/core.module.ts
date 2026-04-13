@@ -13,6 +13,7 @@ import { MailModule } from '../modules/libs/mail/mail.module';
 import { PasswordRecoveryModule } from '../modules/auth/password-recovery/password-recovery.module';
 import { TotpModule } from '../modules/auth/totp/totp.module';
 import { DeactivationModule } from '../modules/auth/deactivation/deactivation.module';
+import { CronModule } from '../modules/cron/cron.module';
 
 @Module({
   imports: [
@@ -35,6 +36,7 @@ import { DeactivationModule } from '../modules/auth/deactivation/deactivation.mo
     PasswordRecoveryModule,
     TotpModule,
     DeactivationModule,
+    CronModule,
   ],
 })
 export class CoreModule {}
