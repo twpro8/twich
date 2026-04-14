@@ -53,7 +53,7 @@ export class AccountService {
       },
     });
 
-    return await this.verificationService.sendVerificationToken(user);
+    return this.verificationService.sendVerificationToken(user);
   }
 
   async changeEmail(user: User, input: ChangeEmailInput) {

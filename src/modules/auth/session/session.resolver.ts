@@ -14,13 +14,13 @@ export class SessionResolver {
   @Authorization()
   @Query(() => [SessionModel], { name: 'findSessionByUser' })
   async findByUser(@Context() { req }: GqlContext) {
-    return await this.sessionService.findByUser(req);
+    return this.sessionService.findByUser(req);
   }
 
   @Authorization()
   @Query(() => SessionModel, { name: 'findCurrentSession' })
   async fundCurrent(@Context() { req }: GqlContext) {
-    return await this.sessionService.findCurrentSession(req);
+    return this.sessionService.findCurrentSession(req);
   }
 
   @Mutation(() => AuthResultModel, { name: 'loginUser' })
@@ -29,23 +29,23 @@ export class SessionResolver {
     @Args('data') input: LoginInput,
     @UserAgent() userAgent: string,
   ) {
-    return await this.sessionService.login(req, input, userAgent);
+    return this.sessionService.login(req, input, userAgent);
   }
 
   @Authorization()
   @Mutation(() => Boolean, { name: 'logoutUser' })
   async logout(@Context() { req }: GqlContext) {
-    return await this.sessionService.logout(req);
+    return this.sessionService.logout(req);
   }
 
   @Mutation(() => Boolean, { name: 'clearSessionCookie' })
-  async clearSession(@Context() { req }: GqlContext) {
-    return await this.sessionService.clearSession(req);
+  clearSession(@Context() { req }: GqlContext) {
+    return this.sessionService.clearSession(req);
   }
 
   @Authorization()
   @Mutation(() => Boolean, { name: 'removeSession' })
   async removeSession(@Context() { req }: GqlContext, @Args('id') id: string) {
-    return await this.sessionService.removeSession(req, id);
+    return this.sessionService.removeSession(req, id);
   }
 }

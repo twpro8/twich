@@ -1,7 +1,12 @@
+import type { SessionData } from 'express-session';
+
 import { PrismaService } from '@/src/core/prisma/prisma.service';
 import { RedisService } from '@/src/core/redis/redis.service';
 import { getSessionMetadata } from '@/src/shared/utils/session-metadata.util';
+
+import type { Session } from '@/src/shared/types/session.types';
 import { destroySession, saveSession } from '@/src/shared/utils/session.util';
+
 import {
   BadRequestException,
   ConflictException,
@@ -34,24 +39,30 @@ export class SessionService {
 
     const keys = await this.redisService.client.keys('*');
 
-    const userSessions: any[] = [];
+    const userSessions: Session[] = [];
 
     for (const key of keys) {
       const sessionData = await this.redisService.client.get(key);
 
       if (sessionData) {
-        const parsed = JSON.parse(sessionData);
+        const parsed = JSON.parse(sessionData) as SessionData;
 
         if (parsed.userId === userId) {
           userSessions.push({
-            ...parsed,
             id: key.split(':')[1],
+            userId: parsed.userId,
+            metadata: parsed.metadata,
+            createdAt: parsed.createdAt,
           });
         }
       }
     }
 
-    userSessions.sort((a, b) => b.createdAt - a.createdAt);
+    userSessions.sort(
+      (a, b) =>
+        new Date(b.createdAt ?? 0).getTime() -
+        new Date(a.createdAt ?? 0).getTime(),
+    );
 
     return userSessions.filter(session => session.id !== req.session.id);
   }
@@ -67,7 +78,7 @@ export class SessionService {
       throw new NotFoundException('Session not found');
     }
 
-    const parsed = JSON.parse(sessionData);
+    const parsed = JSON.parse(sessionData) as SessionData;
 
     return { ...parsed, id: sessionId };
   }
@@ -127,7 +138,7 @@ export class SessionService {
     return destroySession(req, this.configService);
   }
 
-  async clearSession(req: Request) {
+  clearSession(req: Request) {
     req.res?.clearCookie(this.configService.getOrThrow<string>('SESSION_NAME'));
     return true;
   }

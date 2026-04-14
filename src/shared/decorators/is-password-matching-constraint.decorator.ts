@@ -7,12 +7,12 @@ import {
 
 @ValidatorConstraint({ name: 'IsPasswordMatching', async: false })
 export class IsPasswordMatchingConstraint implements ValidatorConstraintInterface {
-  public validate(confirmPassword: string, args: ValidationArguments) {
+  validate(confirmPassword: string, args: ValidationArguments) {
     const obj = args.object as NewPasswordInput;
     return obj.password === confirmPassword;
   }
 
-  public defaultMessage(ValidationArguments?: ValidationArguments) {
+  defaultMessage() {
     return 'Passwords do not match';
   }
 }

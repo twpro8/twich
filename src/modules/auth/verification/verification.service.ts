@@ -56,7 +56,9 @@ export class VerificationService {
 
     const metadata = getSessionMetadata(req, userAgent);
 
-    return saveSession(req, user, metadata);
+    const { user: savedUser } = await saveSession(req, user, metadata);
+
+    return savedUser;
   }
 
   async sendVerificationToken(user: User) {

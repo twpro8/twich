@@ -70,8 +70,8 @@ export class MailService {
     return this.sendMail(email, 'Account Deleted', html);
   }
 
-  private sendMail(email: string, subject: string, html: string) {
-    return this.mailerService.sendMail({
+  private async sendMail(email: string, subject: string, html: string) {
+    await this.mailerService.sendMail({
       to: email,
       subject,
       html,

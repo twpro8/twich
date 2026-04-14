@@ -13,7 +13,7 @@ export class AccountResolver {
   constructor(private readonly accountService: AccountService) {}
 
   @Authorization()
-  @Query(() => UserModel)
+  @Query(() => UserModel, { name: 'findProfile' })
   async me(@Authorized('id') id: string) {
     return this.accountService.me(id);
   }

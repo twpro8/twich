@@ -13,7 +13,7 @@ export class TotpResolver {
   @Authorization()
   @Query(() => TotpModel, { name: 'generateTotpKey' })
   async generateTotpKey(@Authorized() user: User) {
-    return await this.totpService.generateTotpKey(user);
+    return this.totpService.generateTotpKey(user);
   }
 
   @Authorization()
@@ -22,12 +22,12 @@ export class TotpResolver {
     @Authorized() user: User,
     @Args('data') input: EnableTotpInput,
   ) {
-    return await this.totpService.enableTotp(user, input);
+    return this.totpService.enableTotp(user, input);
   }
 
   @Authorization()
   @Mutation(() => Boolean, { name: 'disableTotp' })
   async disableTotp(@Authorized() user: User) {
-    return await this.totpService.disableTotp(user);
+    return this.totpService.disableTotp(user);
   }
 }

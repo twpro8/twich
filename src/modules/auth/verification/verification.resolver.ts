@@ -15,6 +15,6 @@ export class VerificationResolver {
     @Args('data') input: VerificationInput,
     @UserAgent() userAgent: string,
   ) {
-    return await this.verificationService.verifyEmail(req, input, userAgent);
+    return this.verificationService.verifyEmail(req, input, userAgent);
   }
 }
