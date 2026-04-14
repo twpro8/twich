@@ -166,7 +166,7 @@ export type TokenGroupByOutputType = {
   expiresAt: Date
   createdAt: Date
   updatedAt: Date
-  userId: string
+  userId: string | null
   _count: TokenCountAggregateOutputType | null
   _min: TokenMinAggregateOutputType | null
   _max: TokenMaxAggregateOutputType | null
@@ -197,7 +197,7 @@ export type TokenWhereInput = {
   expiresAt?: Prisma.DateTimeFilter<"Token"> | Date | string
   createdAt?: Prisma.DateTimeFilter<"Token"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Token"> | Date | string
-  userId?: Prisma.UuidFilter<"Token"> | string
+  userId?: Prisma.UuidNullableFilter<"Token"> | string | null
   user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }
 
@@ -208,7 +208,7 @@ export type TokenOrderByWithRelationInput = {
   expiresAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
+  userId?: Prisma.SortOrderInput | Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
 }
 
@@ -222,7 +222,7 @@ export type TokenWhereUniqueInput = Prisma.AtLeast<{
   expiresAt?: Prisma.DateTimeFilter<"Token"> | Date | string
   createdAt?: Prisma.DateTimeFilter<"Token"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Token"> | Date | string
-  userId?: Prisma.UuidFilter<"Token"> | string
+  userId?: Prisma.UuidNullableFilter<"Token"> | string | null
   user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }, "id" | "token">
 
@@ -233,7 +233,7 @@ export type TokenOrderByWithAggregationInput = {
   expiresAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
+  userId?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.TokenCountOrderByAggregateInput
   _max?: Prisma.TokenMaxOrderByAggregateInput
   _min?: Prisma.TokenMinOrderByAggregateInput
@@ -249,7 +249,7 @@ export type TokenScalarWhereWithAggregatesInput = {
   expiresAt?: Prisma.DateTimeWithAggregatesFilter<"Token"> | Date | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Token"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Token"> | Date | string
-  userId?: Prisma.UuidWithAggregatesFilter<"Token"> | string
+  userId?: Prisma.UuidNullableWithAggregatesFilter<"Token"> | string | null
 }
 
 export type TokenCreateInput = {
@@ -269,7 +269,7 @@ export type TokenUncheckedCreateInput = {
   expiresAt: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
-  userId: string
+  userId?: string | null
 }
 
 export type TokenUpdateInput = {
@@ -289,7 +289,7 @@ export type TokenUncheckedUpdateInput = {
   expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type TokenCreateManyInput = {
@@ -299,7 +299,7 @@ export type TokenCreateManyInput = {
   expiresAt: Date | string
   createdAt?: Date | string
   updatedAt?: Date | string
-  userId: string
+  userId?: string | null
 }
 
 export type TokenUpdateManyMutationInput = {
@@ -318,7 +318,7 @@ export type TokenUncheckedUpdateManyInput = {
   expiresAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type TokenListRelationFilter = {
@@ -461,7 +461,7 @@ export type TokenScalarWhereInput = {
   expiresAt?: Prisma.DateTimeFilter<"Token"> | Date | string
   createdAt?: Prisma.DateTimeFilter<"Token"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Token"> | Date | string
-  userId?: Prisma.UuidFilter<"Token"> | string
+  userId?: Prisma.UuidNullableFilter<"Token"> | string | null
 }
 
 export type TokenCreateManyUserInput = {
@@ -568,7 +568,7 @@ export type $TokenPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     expiresAt: Date
     createdAt: Date
     updatedAt: Date
-    userId: string
+    userId: string | null
   }, ExtArgs["result"]["token"]>
   composites: {}
 }

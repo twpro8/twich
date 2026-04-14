@@ -19,10 +19,12 @@ export class AccountService {
   ) {}
 
   async me(id: string) {
-    const user = await this.prismaService.user.findUnique({
+    return this.prismaService.user.findUnique({
       where: { id },
+      include: {
+        socialLinks: true,
+      },
     });
-    return user;
   }
 
   async create(input: CreateUserInput) {

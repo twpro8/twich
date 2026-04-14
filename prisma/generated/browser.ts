@@ -27,3 +27,8 @@ export type User = Prisma.UserModel
  * 
  */
 export type Token = Prisma.TokenModel
+/**
+ * Model SocialLink
+ * 
+ */
+export type SocialLink = Prisma.SocialLinkModel

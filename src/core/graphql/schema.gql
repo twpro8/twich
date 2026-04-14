@@ -28,6 +28,11 @@ input ChangeProfileInfoInput {
   username: String!
 }
 
+input ChangeSocialLinksOrderInput {
+  id: String!
+  position: Float!
+}
+
 input CreateUserInput {
   email: String!
   password: String!
@@ -69,8 +74,10 @@ type Mutation {
   changePassword(data: ChangePasswordInput!): Boolean!
   changeProfileInfo(data: ChangeProfileInfoInput!): Boolean!
   clearSessionCookie: Boolean!
+  createSocialLink(data: SocialLinkInput!): Boolean!
   createUser(data: CreateUserInput!): Boolean!
   deactivateAccount(data: AccountDeactivationInput!): AuthResultModel!
+  deleteSocialLink(id: String!): Boolean!
   disableTotp: Boolean!
   enableTotp(data: EnableTotpInput!): Boolean!
   loginUser(data: LoginInput!): AuthResultModel!
@@ -78,7 +85,9 @@ type Mutation {
   newPassword(data: NewPasswordInput!): Boolean!
   removeAvatar: Boolean!
   removeSession(id: String!): Boolean!
+  reorderSocialLinks(data: [ChangeSocialLinksOrderInput!]!): Boolean!
   resetPassword(data: ResetPasswordInput!): Boolean!
+  updateSocialLink(data: SocialLinkInput!, id: String!): Boolean!
   verifyEmail(data: VerificationInput!): UserModel!
 }
 
@@ -92,6 +101,7 @@ type Query {
   findCurrentSession: SessionModel!
   findProfile: UserModel!
   findSessionByUser: [SessionModel!]!
+  findSocialLinks: [SocialLinkModel!]!
   generateTotpKey: TotpModel!
 }
 
@@ -112,6 +122,21 @@ type SessionModel {
   userId: String!
 }
 
+input SocialLinkInput {
+  name: String!
+  url: String!
+}
+
+type SocialLinkModel {
+  createdAt: DateTime!
+  id: String!
+  name: String!
+  position: Float!
+  updatedAt: DateTime!
+  url: String!
+  userId: String!
+}
+
 type TotpModel {
   qrCodeUrl: String!
   secret: String!
@@ -129,6 +154,7 @@ type UserModel {
   isActive: Boolean!
   isVerified: Boolean!
   name: String!
+  socialLinks: [SocialLinkModel!]!
   updatedAt: DateTime!
   username: String!
 }

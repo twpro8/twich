@@ -41,7 +41,7 @@ export class VerificationService {
 
     const user = await this.prismaService.user.update({
       where: {
-        id: existingToken.userId,
+        id: existingToken.userId ?? undefined,
       },
       data: {
         isActive: true,
