@@ -14,6 +14,8 @@ import { MailModule } from '../modules/libs/mail/mail.module';
 import { IS_DEV_ENV } from '../shared/utils/is-dev.util';
 import { PrismaModule } from './prisma/prisma.module';
 import { RedisModule } from './redis/redis.module';
+import { StorageModule } from '@/src/modules/libs/storage/storage.module';
+import { ProfileModule } from '@/src/modules/auth/profile/profile.module';
 
 @Module({
   imports: [
@@ -31,13 +33,15 @@ import { RedisModule } from './redis/redis.module';
     PrismaModule,
     RedisModule,
     MailModule,
+    StorageModule,
+    CronModule,
     AccountModule,
+    ProfileModule,
     SessionModule,
     VerificationModule,
     PasswordRecoveryModule,
     TotpModule,
     DeactivationModule,
-    CronModule,
   ],
 })
 export class CoreModule {}
