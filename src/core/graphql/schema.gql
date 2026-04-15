@@ -33,6 +33,10 @@ input ChangeSocialLinksOrderInput {
   position: Float!
 }
 
+input ChangeStreamInfoInput {
+  title: String!
+}
+
 input CreateUserInput {
   email: String!
   password: String!
@@ -55,6 +59,12 @@ input EnableTotpInput {
   secret: String!
 }
 
+input FiltersInput {
+  limit: Int! = 1
+  searchTerm: String
+  skip: Int! = 5
+}
+
 type LocationModel {
   city: String!
   country: String!
@@ -73,6 +83,8 @@ type Mutation {
   changeEmail(data: ChangeEmailInput!): Boolean!
   changePassword(data: ChangePasswordInput!): Boolean!
   changeProfileInfo(data: ChangeProfileInfoInput!): Boolean!
+  changeStreamInfo(data: ChangeStreamInfoInput!): Boolean!
+  changeStreamThumbnail(thumbnail: Upload!): Boolean!
   clearSessionCookie: Boolean!
   createSocialLink(data: SocialLinkInput!): Boolean!
   createUser(data: CreateUserInput!): Boolean!
@@ -85,6 +97,7 @@ type Mutation {
   newPassword(data: NewPasswordInput!): Boolean!
   removeAvatar: Boolean!
   removeSession(id: String!): Boolean!
+  removeStreamThumbnail: Boolean!
   reorderSocialLinks(data: [ChangeSocialLinksOrderInput!]!): Boolean!
   resetPassword(data: ResetPasswordInput!): Boolean!
   updateSocialLink(data: SocialLinkInput!, id: String!): Boolean!
@@ -98,8 +111,10 @@ input NewPasswordInput {
 }
 
 type Query {
+  findAllStreams(filters: FiltersInput!): [StreamModel!]!
   findCurrentSession: SessionModel!
   findProfile: UserModel!
+  findRandomStreams: [StreamModel!]!
   findSessionByUser: [SessionModel!]!
   findSocialLinks: [SocialLinkModel!]!
   generateTotpKey: TotpModel!
@@ -137,6 +152,20 @@ type SocialLinkModel {
   userId: String!
 }
 
+type StreamModel {
+  createdAt: DateTime!
+  id: String!
+  ingressId: String
+  isLive: Boolean!
+  serverUrl: String
+  streamKey: String
+  thumbnailUrl: String
+  title: String!
+  updatedAt: DateTime!
+  user: UserModel!
+  userId: String
+}
+
 type TotpModel {
   qrCodeUrl: String!
   secret: String!
@@ -154,7 +183,8 @@ type UserModel {
   isActive: Boolean!
   isVerified: Boolean!
   name: String!
-  socialLinks: [SocialLinkModel!]!
+  socialLinks: [SocialLinkModel!]
+  stream: StreamModel
   updatedAt: DateTime!
   username: String!
 }

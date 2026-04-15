@@ -16,6 +16,7 @@ import { PrismaModule } from './prisma/prisma.module';
 import { RedisModule } from './redis/redis.module';
 import { StorageModule } from '@/src/modules/libs/storage/storage.module';
 import { ProfileModule } from '@/src/modules/auth/profile/profile.module';
+import { StreamModule } from '@/src/modules/stream/stream.module';
 
 @Module({
   imports: [
@@ -42,6 +43,7 @@ import { ProfileModule } from '@/src/modules/auth/profile/profile.module';
     PasswordRecoveryModule,
     TotpModule,
     DeactivationModule,
+    StreamModule,
   ],
 })
 export class CoreModule {}
