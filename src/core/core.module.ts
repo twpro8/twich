@@ -17,6 +17,9 @@ import { RedisModule } from './redis/redis.module';
 import { StorageModule } from '@/src/modules/libs/storage/storage.module';
 import { ProfileModule } from '@/src/modules/auth/profile/profile.module';
 import { StreamModule } from '@/src/modules/stream/stream.module';
+import { LivekitModule } from '@/src/modules/libs/livekit/livekit.module';
+import { getLiveKitConfig } from '@/src/core/config/livekit.config';
+import { IngressModule } from '@/src/modules/stream/ingress/ingress.module';
 
 @Module({
   imports: [
@@ -31,11 +34,17 @@ import { StreamModule } from '@/src/modules/stream/stream.module';
       useFactory: getGraphQLConfig,
       inject: [ConfigService],
     }),
+    LivekitModule.registerAsync({
+      imports: [ConfigModule],
+      useFactory: getLiveKitConfig,
+      inject: [ConfigService],
+    }),
     PrismaModule,
     RedisModule,
     MailModule,
     StorageModule,
     CronModule,
+    LivekitModule,
     AccountModule,
     ProfileModule,
     SessionModule,
@@ -44,6 +53,7 @@ import { StreamModule } from '@/src/modules/stream/stream.module';
     TotpModule,
     DeactivationModule,
     StreamModule,
+    IngressModule,
   ],
 })
 export class CoreModule {}
