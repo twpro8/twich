@@ -10,6 +10,7 @@ import { RedisService } from '@/src/core/redis/redis.service';
 
 import { CoreModule } from './core/core.module';
 import { parseBoolean } from './shared/utils/parse-boolean.util';
+import * as express from 'express';
 
 async function bootstrap() {
   const app = await NestFactory.create(CoreModule);
@@ -52,6 +53,8 @@ async function bootstrap() {
       }),
     }),
   );
+
+  app.use('/webhook/livekit', express.raw({ type: '*/*' }));
 
   app.enableCors({
     origin: config.getOrThrow<string>('ALLOWED_ORIGIN'),
