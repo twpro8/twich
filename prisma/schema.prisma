@@ -65,17 +65,32 @@ model SocialLink {
 }
 
 model Stream {
-  id           String   @id @default(uuid()) @db.Uuid
+  id           String    @id @default(uuid()) @db.Uuid
   title        String
-  thumbnailUrl String?  @map("thumbnail_url")
-  ingressId    String?  @unique @map("ingress_id")
-  serverUrl    String?  @map("server_url")
-  streamKey    String?  @map("stream_key")
-  isLive       Boolean  @default(false) @map("is_live")
-  createdAt    DateTime @default(now()) @map("created_at")
-  updatedAt    DateTime @updatedAt @map("updated_at")
-  user         User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId       String?  @unique @map("user_id") @db.Uuid
+  thumbnailUrl String?   @map("thumbnail_url")
+  ingressId    String?   @unique @map("ingress_id")
+  serverUrl    String?   @map("server_url")
+  streamKey    String?   @map("stream_key")
+  isLive       Boolean   @default(false) @map("is_live")
+  createdAt    DateTime  @default(now()) @map("created_at")
+  updatedAt    DateTime  @updatedAt @map("updated_at")
+  user         User?     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId       String?   @unique @map("user_id") @db.Uuid
+  category     Category? @relation(fields: [categoryId], references: [id])
+  categoryId   String?   @map("category_id") @db.Uuid
 
   @@map("streams")
+}
+
+model Category {
+  id           String   @id @default(uuid()) @db.Uuid
+  name         String
+  slug         String   @unique
+  description  String?
+  thumbnailUrl String   @map("thumbnail_url")
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+  streams      Stream[]
+
+  @@map("categories")
 }

@@ -45,11 +45,18 @@ export class StreamService {
   }
 
   async changeStreamInfo(user: User, input: ChangeStreamInfoInput) {
-    const { title } = input;
+    const { title, categoryId } = input;
 
     await this.prismaService.stream.update({
       where: { userId: user.id },
-      data: { title },
+      data: {
+        title,
+        category: {
+          connect: {
+            id: categoryId,
+          },
+        },
+      },
     });
 
     return true;
@@ -122,10 +129,16 @@ export class StreamService {
   async findRandomStreams() {
     const LIMIT = 4;
 
+    // todo: optimization
+
     return this.prismaService.$queryRaw<Stream[]>`
-      SELECT s.*, row_to_json(u.*) AS user
+      SELECT
+        s.*,
+        row_to_json(u.*) AS user,
+        row_to_json(c.*) AS category
       FROM "streams" s
       JOIN "users" u ON u.id = s."user_id"
+      LEFT JOIN "categories" c ON c.id = s."category_id"
       WHERE u."is_deactivated" = false
       ORDER BY RANDOM()
       LIMIT ${LIMIT}

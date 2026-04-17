@@ -13,6 +13,17 @@ type AuthResultModel {
   user: UserModel
 }
 
+type CategoryModel {
+  createdAt: DateTime!
+  description: String
+  id: String!
+  name: String!
+  slug: String!
+  streams: [StreamModel!]
+  thumbnailUrl: String!
+  updatedAt: DateTime!
+}
+
 input ChangeEmailInput {
   email: String!
 }
@@ -34,6 +45,7 @@ input ChangeSocialLinksOrderInput {
 }
 
 input ChangeStreamInfoInput {
+  categoryId: String!
   title: String!
 }
 
@@ -122,9 +134,12 @@ input NewPasswordInput {
 }
 
 type Query {
+  findAllCategories: [CategoryModel!]!
   findAllStreams(filters: FiltersInput!): [StreamModel!]!
+  findCategoryBySlug(slug: String!): CategoryModel!
   findCurrentSession: SessionModel!
   findProfile: UserModel!
+  findRandomCategories: [CategoryModel!]!
   findRandomStreams: [StreamModel!]!
   findSessionByUser: [SessionModel!]!
   findSocialLinks: [SocialLinkModel!]!
@@ -164,6 +179,8 @@ type SocialLinkModel {
 }
 
 type StreamModel {
+  category: CategoryModel
+  categoryId: String
   createdAt: DateTime!
   id: String!
   ingressId: String

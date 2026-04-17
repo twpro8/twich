@@ -1,6 +1,7 @@
 import { Field, ObjectType } from '@nestjs/graphql';
-import type { Stream } from '@prisma/generated/client';
+import { Stream } from '@prisma/generated/client';
 import { UserModel } from '@/src/modules/auth/account/models/user.model';
+import { CategoryModel } from '@/src/modules/category/models/category.model';
 
 @ObjectType()
 export class StreamModel implements Stream {
@@ -27,6 +28,12 @@ export class StreamModel implements Stream {
 
   @Field()
   isLive: boolean;
+
+  @Field(() => String, { nullable: true })
+  categoryId: string | null;
+
+  @Field(() => CategoryModel, { nullable: true })
+  category: CategoryModel | null;
 
   @Field()
   createdAt: Date;
