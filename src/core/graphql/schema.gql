@@ -65,6 +65,15 @@ input FiltersInput {
   skip: Int! = 5
 }
 
+input GenerateStreamTokenInput {
+  channelId: String!
+  userId: String!
+}
+
+type GenerateStreamTokenModel {
+  token: String!
+}
+
 type LocationModel {
   city: String!
   country: String!
@@ -93,6 +102,7 @@ type Mutation {
   deleteSocialLink(id: String!): Boolean!
   disableTotp: Boolean!
   enableTotp(data: EnableTotpInput!): Boolean!
+  generateStreamToken(data: GenerateStreamTokenInput!): GenerateStreamTokenModel!
   loginUser(data: LoginInput!): AuthResultModel!
   logoutUser: Boolean!
   newPassword(data: NewPasswordInput!): Boolean!

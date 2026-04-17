@@ -1,4 +1,8 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { PrismaService } from '@/src/core/prisma/prisma.service';
 import { FiltersInput } from '@/src/modules/stream/inputs/filters.input';
 import type { StreamWhereInput } from '@prisma/generated/models/Stream';
@@ -7,12 +11,16 @@ import { ChangeStreamInfoInput } from '@/src/modules/stream/inputs/change-stream
 import { FileUpload } from 'graphql-upload-ts';
 import sharp from 'sharp';
 import { StorageService } from '@/src/modules/libs/storage/storage.service';
+import { GenerateStreamTokenInput } from '@/src/modules/stream/inputs/generate-stream-token.input';
+import { ConfigService } from '@nestjs/config';
+import { AccessToken } from 'livekit-server-sdk';
 
 @Injectable()
 export class StreamService {
   constructor(
     private readonly prismaService: PrismaService,
     private readonly storageService: StorageService,
+    private readonly configService: ConfigService,
   ) {}
 
   async findAll(input: FiltersInput) {
@@ -143,5 +151,53 @@ export class StreamService {
         },
       ],
     };
+  }
+
+  async generateStreamToken(input: GenerateStreamTokenInput) {
+    const { userId, channelId } = input;
+
+    let payload: { id: string; username: string };
+
+    const user = await this.prismaService.user.findUnique({
+      where: { id: userId },
+    });
+
+    if (user) {
+      payload = {
+        id: user.id,
+        username: user.username,
+      };
+    } else {
+      payload = {
+        id: userId,
+        username: `Guest ${Math.floor(Math.random() * 100000)}`,
+      };
+    }
+
+    const channel = await this.prismaService.user.findUnique({
+      where: { id: channelId },
+    });
+
+    if (!channel) {
+      throw new NotFoundException(`Channel not found`);
+    }
+
+    const isHost = payload.id === channel.id;
+
+    const token = new AccessToken(
+      this.configService.getOrThrow<string>('LIVEKIT_API_KEY'),
+      this.configService.getOrThrow<string>('LIVEKIT_API_SECRET'),
+      {
+        identity: isHost ? `Host-${payload.id}` : payload.id,
+        name: payload.username,
+      },
+    );
+    token.addGrant({
+      room: channelId,
+      roomJoin: true,
+      canPublish: false,
+    });
+
+    return { token: token.toJwt() };
   }
 }
