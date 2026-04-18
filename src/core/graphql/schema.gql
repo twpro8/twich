@@ -24,6 +24,12 @@ type CategoryModel {
   updatedAt: DateTime!
 }
 
+input ChangeChatSettingsInput {
+  isChatEnabled: Boolean!
+  isChatFollowersOnly: Boolean!
+  isChatPremiumFollowersOnly: Boolean!
+}
+
 input ChangeEmailInput {
   email: String!
 }
@@ -47,6 +53,17 @@ input ChangeSocialLinksOrderInput {
 input ChangeStreamInfoInput {
   categoryId: String!
   title: String!
+}
+
+type ChatMessageModel {
+  createdAt: DateTime!
+  id: String!
+  stream: StreamModel!
+  streamId: String!
+  text: String!
+  updatedAt: DateTime!
+  user: UserModel!
+  userId: String!
 }
 
 input CreateUserInput {
@@ -101,6 +118,7 @@ input LoginInput {
 
 type Mutation {
   changeAvatar(avatar: Upload!): Boolean!
+  changeChatSettings(data: ChangeChatSettingsInput!): Boolean!
   changeEmail(data: ChangeEmailInput!): Boolean!
   changePassword(data: ChangePasswordInput!): Boolean!
   changeProfileInfo(data: ChangeProfileInfoInput!): Boolean!
@@ -123,6 +141,7 @@ type Mutation {
   removeStreamThumbnail: Boolean!
   reorderSocialLinks(data: [ChangeSocialLinksOrderInput!]!): Boolean!
   resetPassword(data: ResetPasswordInput!): Boolean!
+  sendChatMessage(data: SendMessageInput!): ChatMessageModel!
   updateSocialLink(data: SocialLinkInput!, id: String!): Boolean!
   verifyEmail(data: VerificationInput!): UserModel!
 }
@@ -138,6 +157,7 @@ type Query {
   findAllStreams(filters: FiltersInput!): [StreamModel!]!
   findCategoryBySlug(slug: String!): CategoryModel!
   findCurrentSession: SessionModel!
+  findMessagesByStream(streamId: String!): [ChatMessageModel!]!
   findProfile: UserModel!
   findRandomCategories: [CategoryModel!]!
   findRandomStreams: [StreamModel!]!
@@ -148,6 +168,11 @@ type Query {
 
 input ResetPasswordInput {
   email: String!
+}
+
+input SendMessageInput {
+  streamId: String!
+  text: String!
 }
 
 type SessionMetadataModel {
@@ -181,9 +206,13 @@ type SocialLinkModel {
 type StreamModel {
   category: CategoryModel
   categoryId: String
+  chatMessages: [ChatMessageModel!]!
   createdAt: DateTime!
   id: String!
   ingressId: String
+  isChatEnabled: Boolean!
+  isChatFollowersOnly: Boolean!
+  isChatPremiumFollowersOnly: Boolean!
   isLive: Boolean!
   serverUrl: String
   streamKey: String
@@ -192,6 +221,10 @@ type StreamModel {
   updatedAt: DateTime!
   user: UserModel!
   userId: String
+}
+
+type Subscription {
+  chatMessageAdded(streamId: String!): ChatMessageModel!
 }
 
 type TotpModel {

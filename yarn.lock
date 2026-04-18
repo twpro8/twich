@@ -6097,6 +6097,11 @@ graphmatch@^1.1.0:
   resolved "https://registry.npmjs.org/graphmatch/-/graphmatch-1.1.1.tgz"
   integrity sha512-5ykVn/EXM1hF0XCaWh05VbYvEiOL2lY1kBxZtaYsyvjp7cmWOU1XsAdfQBwClraEofXDT197lFbXOEVMHpvQOg==
 
+graphql-subscriptions@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/graphql-subscriptions/-/graphql-subscriptions-3.0.0.tgz#820c846ef271414c08f64827b5c9a192801e1b6f"
+  integrity sha512-kZCdevgmzDjGAOqH7GlDmQXYAkuHoKpMlJrqF40HMPhUhM5ZWSFSxCwD/nSi6AkaijmMfsFhoJRGJ27UseCvRA==
+
 graphql-tag@2.12.6:
   version "2.12.6"
   resolved "https://registry.npmjs.org/graphql-tag/-/graphql-tag-2.12.6.tgz"
@@ -6117,6 +6122,11 @@ graphql-ws@6.0.7:
   version "6.0.7"
   resolved "https://registry.npmjs.org/graphql-ws/-/graphql-ws-6.0.7.tgz"
   integrity sha512-yoLRW+KRlDmnnROdAu7sX77VNLC0bsFoZyGQJLy1cF+X/SkLg/fWkRGrEEYQK8o2cafJ2wmEaMqMEZB3U3DYDg==
+
+graphql-ws@^6.0.8:
+  version "6.0.8"
+  resolved "https://registry.yarnpkg.com/graphql-ws/-/graphql-ws-6.0.8.tgz#6712bb9da8462937e92343e3146726f89424df68"
+  integrity sha512-m3EOaNsUBXwAnkBWbzPfe0Nq8pXUfxsWnolC54sru3FzHvhTZL0Ouf/BoQsaGAXqM+YPerXOJ47BUnmgmoupCw==
 
 graphql@^16.13.2:
   version "16.13.2"

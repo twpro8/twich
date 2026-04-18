@@ -42,3 +42,8 @@ export type Stream = Prisma.StreamModel
  * 
  */
 export type Category = Prisma.CategoryModel
+/**
+ * Model ChatMessage
+ * 
+ */
+export type ChatMessage = Prisma.ChatMessageModel

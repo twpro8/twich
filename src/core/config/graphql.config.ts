@@ -26,5 +26,8 @@ export function getGraphQLConfig(
         ? ApolloServerPluginLandingPageLocalDefault()
         : ApolloServerPluginLandingPageDisabled(),
     ],
+    subscriptions: {
+      'graphql-ws': true,
+    },
   };
 }

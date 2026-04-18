@@ -36,32 +36,32 @@ export type SocialLinkSumAggregateOutputType = {
 
 export type SocialLinkMinAggregateOutputType = {
   id: string | null
+  userId: string | null
   name: string | null
   url: string | null
   position: number | null
   createdAt: Date | null
   updatedAt: Date | null
-  userId: string | null
 }
 
 export type SocialLinkMaxAggregateOutputType = {
   id: string | null
+  userId: string | null
   name: string | null
   url: string | null
   position: number | null
   createdAt: Date | null
   updatedAt: Date | null
-  userId: string | null
 }
 
 export type SocialLinkCountAggregateOutputType = {
   id: number
+  userId: number
   name: number
   url: number
   position: number
   createdAt: number
   updatedAt: number
-  userId: number
   _all: number
 }
 
@@ -76,32 +76,32 @@ export type SocialLinkSumAggregateInputType = {
 
 export type SocialLinkMinAggregateInputType = {
   id?: true
+  userId?: true
   name?: true
   url?: true
   position?: true
   createdAt?: true
   updatedAt?: true
-  userId?: true
 }
 
 export type SocialLinkMaxAggregateInputType = {
   id?: true
+  userId?: true
   name?: true
   url?: true
   position?: true
   createdAt?: true
   updatedAt?: true
-  userId?: true
 }
 
 export type SocialLinkCountAggregateInputType = {
   id?: true
+  userId?: true
   name?: true
   url?: true
   position?: true
   createdAt?: true
   updatedAt?: true
-  userId?: true
   _all?: true
 }
 
@@ -193,12 +193,12 @@ export type SocialLinkGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inter
 
 export type SocialLinkGroupByOutputType = {
   id: string
+  userId: string | null
   name: string
   url: string
   position: number
   createdAt: Date
   updatedAt: Date
-  userId: string | null
   _count: SocialLinkCountAggregateOutputType | null
   _avg: SocialLinkAvgAggregateOutputType | null
   _sum: SocialLinkSumAggregateOutputType | null
@@ -226,23 +226,23 @@ export type SocialLinkWhereInput = {
   OR?: Prisma.SocialLinkWhereInput[]
   NOT?: Prisma.SocialLinkWhereInput | Prisma.SocialLinkWhereInput[]
   id?: Prisma.UuidFilter<"SocialLink"> | string
+  userId?: Prisma.UuidNullableFilter<"SocialLink"> | string | null
   name?: Prisma.StringFilter<"SocialLink"> | string
   url?: Prisma.StringFilter<"SocialLink"> | string
   position?: Prisma.IntFilter<"SocialLink"> | number
   createdAt?: Prisma.DateTimeFilter<"SocialLink"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"SocialLink"> | Date | string
-  userId?: Prisma.UuidNullableFilter<"SocialLink"> | string | null
   user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }
 
 export type SocialLinkOrderByWithRelationInput = {
   id?: Prisma.SortOrder
+  userId?: Prisma.SortOrderInput | Prisma.SortOrder
   name?: Prisma.SortOrder
   url?: Prisma.SortOrder
   position?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  userId?: Prisma.SortOrderInput | Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
 }
 
@@ -251,23 +251,23 @@ export type SocialLinkWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.SocialLinkWhereInput | Prisma.SocialLinkWhereInput[]
   OR?: Prisma.SocialLinkWhereInput[]
   NOT?: Prisma.SocialLinkWhereInput | Prisma.SocialLinkWhereInput[]
+  userId?: Prisma.UuidNullableFilter<"SocialLink"> | string | null
   name?: Prisma.StringFilter<"SocialLink"> | string
   url?: Prisma.StringFilter<"SocialLink"> | string
   position?: Prisma.IntFilter<"SocialLink"> | number
   createdAt?: Prisma.DateTimeFilter<"SocialLink"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"SocialLink"> | Date | string
-  userId?: Prisma.UuidNullableFilter<"SocialLink"> | string | null
   user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }, "id">
 
 export type SocialLinkOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
+  userId?: Prisma.SortOrderInput | Prisma.SortOrder
   name?: Prisma.SortOrder
   url?: Prisma.SortOrder
   position?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  userId?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.SocialLinkCountOrderByAggregateInput
   _avg?: Prisma.SocialLinkAvgOrderByAggregateInput
   _max?: Prisma.SocialLinkMaxOrderByAggregateInput
@@ -280,12 +280,12 @@ export type SocialLinkScalarWhereWithAggregatesInput = {
   OR?: Prisma.SocialLinkScalarWhereWithAggregatesInput[]
   NOT?: Prisma.SocialLinkScalarWhereWithAggregatesInput | Prisma.SocialLinkScalarWhereWithAggregatesInput[]
   id?: Prisma.UuidWithAggregatesFilter<"SocialLink"> | string
+  userId?: Prisma.UuidNullableWithAggregatesFilter<"SocialLink"> | string | null
   name?: Prisma.StringWithAggregatesFilter<"SocialLink"> | string
   url?: Prisma.StringWithAggregatesFilter<"SocialLink"> | string
   position?: Prisma.IntWithAggregatesFilter<"SocialLink"> | number
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"SocialLink"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"SocialLink"> | Date | string
-  userId?: Prisma.UuidNullableWithAggregatesFilter<"SocialLink"> | string | null
 }
 
 export type SocialLinkCreateInput = {
@@ -300,12 +300,12 @@ export type SocialLinkCreateInput = {
 
 export type SocialLinkUncheckedCreateInput = {
   id?: string
+  userId?: string | null
   name: string
   url: string
   position: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  userId?: string | null
 }
 
 export type SocialLinkUpdateInput = {
@@ -320,22 +320,22 @@ export type SocialLinkUpdateInput = {
 
 export type SocialLinkUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   url?: Prisma.StringFieldUpdateOperationsInput | string
   position?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type SocialLinkCreateManyInput = {
   id?: string
+  userId?: string | null
   name: string
   url: string
   position: number
   createdAt?: Date | string
   updatedAt?: Date | string
-  userId?: string | null
 }
 
 export type SocialLinkUpdateManyMutationInput = {
@@ -349,12 +349,12 @@ export type SocialLinkUpdateManyMutationInput = {
 
 export type SocialLinkUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   url?: Prisma.StringFieldUpdateOperationsInput | string
   position?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type SocialLinkListRelationFilter = {
@@ -369,12 +369,12 @@ export type SocialLinkOrderByRelationAggregateInput = {
 
 export type SocialLinkCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   url?: Prisma.SortOrder
   position?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
 }
 
 export type SocialLinkAvgOrderByAggregateInput = {
@@ -383,22 +383,22 @@ export type SocialLinkAvgOrderByAggregateInput = {
 
 export type SocialLinkMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   url?: Prisma.SortOrder
   position?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
 }
 
 export type SocialLinkMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   url?: Prisma.SortOrder
   position?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
 }
 
 export type SocialLinkSumOrderByAggregateInput = {
@@ -504,12 +504,12 @@ export type SocialLinkScalarWhereInput = {
   OR?: Prisma.SocialLinkScalarWhereInput[]
   NOT?: Prisma.SocialLinkScalarWhereInput | Prisma.SocialLinkScalarWhereInput[]
   id?: Prisma.UuidFilter<"SocialLink"> | string
+  userId?: Prisma.UuidNullableFilter<"SocialLink"> | string | null
   name?: Prisma.StringFilter<"SocialLink"> | string
   url?: Prisma.StringFilter<"SocialLink"> | string
   position?: Prisma.IntFilter<"SocialLink"> | number
   createdAt?: Prisma.DateTimeFilter<"SocialLink"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"SocialLink"> | Date | string
-  userId?: Prisma.UuidNullableFilter<"SocialLink"> | string | null
 }
 
 export type SocialLinkCreateManyUserInput = {
@@ -552,48 +552,48 @@ export type SocialLinkUncheckedUpdateManyWithoutUserInput = {
 
 export type SocialLinkSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  userId?: boolean
   name?: boolean
   url?: boolean
   position?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  userId?: boolean
   user?: boolean | Prisma.SocialLink$userArgs<ExtArgs>
 }, ExtArgs["result"]["socialLink"]>
 
 export type SocialLinkSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  userId?: boolean
   name?: boolean
   url?: boolean
   position?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  userId?: boolean
   user?: boolean | Prisma.SocialLink$userArgs<ExtArgs>
 }, ExtArgs["result"]["socialLink"]>
 
 export type SocialLinkSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  userId?: boolean
   name?: boolean
   url?: boolean
   position?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  userId?: boolean
   user?: boolean | Prisma.SocialLink$userArgs<ExtArgs>
 }, ExtArgs["result"]["socialLink"]>
 
 export type SocialLinkSelectScalar = {
   id?: boolean
+  userId?: boolean
   name?: boolean
   url?: boolean
   position?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  userId?: boolean
 }
 
-export type SocialLinkOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "url" | "position" | "createdAt" | "updatedAt" | "userId", ExtArgs["result"]["socialLink"]>
+export type SocialLinkOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "name" | "url" | "position" | "createdAt" | "updatedAt", ExtArgs["result"]["socialLink"]>
 export type SocialLinkInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.SocialLink$userArgs<ExtArgs>
 }
@@ -611,12 +611,12 @@ export type $SocialLinkPayload<ExtArgs extends runtime.Types.Extensions.Internal
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
+    userId: string | null
     name: string
     url: string
     position: number
     createdAt: Date
     updatedAt: Date
-    userId: string | null
   }, ExtArgs["result"]["socialLink"]>
   composites: {}
 }
@@ -1042,12 +1042,12 @@ export interface Prisma__SocialLinkClient<T, Null = never, ExtArgs extends runti
  */
 export interface SocialLinkFieldRefs {
   readonly id: Prisma.FieldRef<"SocialLink", 'String'>
+  readonly userId: Prisma.FieldRef<"SocialLink", 'String'>
   readonly name: Prisma.FieldRef<"SocialLink", 'String'>
   readonly url: Prisma.FieldRef<"SocialLink", 'String'>
   readonly position: Prisma.FieldRef<"SocialLink", 'Int'>
   readonly createdAt: Prisma.FieldRef<"SocialLink", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"SocialLink", 'DateTime'>
-  readonly userId: Prisma.FieldRef<"SocialLink", 'String'>
 }
     
 

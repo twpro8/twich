@@ -26,88 +26,106 @@ export type AggregateStream = {
 
 export type StreamMinAggregateOutputType = {
   id: string | null
+  userId: string | null
+  categoryId: string | null
+  ingressId: string | null
   title: string | null
   thumbnailUrl: string | null
-  ingressId: string | null
   serverUrl: string | null
   streamKey: string | null
   isLive: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
-  userId: string | null
-  categoryId: string | null
+  isChatEnabled: boolean | null
+  isChatFollowersOnly: boolean | null
+  isChatPremiumFollowersOnly: boolean | null
 }
 
 export type StreamMaxAggregateOutputType = {
   id: string | null
+  userId: string | null
+  categoryId: string | null
+  ingressId: string | null
   title: string | null
   thumbnailUrl: string | null
-  ingressId: string | null
   serverUrl: string | null
   streamKey: string | null
   isLive: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
-  userId: string | null
-  categoryId: string | null
+  isChatEnabled: boolean | null
+  isChatFollowersOnly: boolean | null
+  isChatPremiumFollowersOnly: boolean | null
 }
 
 export type StreamCountAggregateOutputType = {
   id: number
+  userId: number
+  categoryId: number
+  ingressId: number
   title: number
   thumbnailUrl: number
-  ingressId: number
   serverUrl: number
   streamKey: number
   isLive: number
   createdAt: number
   updatedAt: number
-  userId: number
-  categoryId: number
+  isChatEnabled: number
+  isChatFollowersOnly: number
+  isChatPremiumFollowersOnly: number
   _all: number
 }
 
 
 export type StreamMinAggregateInputType = {
   id?: true
+  userId?: true
+  categoryId?: true
+  ingressId?: true
   title?: true
   thumbnailUrl?: true
-  ingressId?: true
   serverUrl?: true
   streamKey?: true
   isLive?: true
   createdAt?: true
   updatedAt?: true
-  userId?: true
-  categoryId?: true
+  isChatEnabled?: true
+  isChatFollowersOnly?: true
+  isChatPremiumFollowersOnly?: true
 }
 
 export type StreamMaxAggregateInputType = {
   id?: true
+  userId?: true
+  categoryId?: true
+  ingressId?: true
   title?: true
   thumbnailUrl?: true
-  ingressId?: true
   serverUrl?: true
   streamKey?: true
   isLive?: true
   createdAt?: true
   updatedAt?: true
-  userId?: true
-  categoryId?: true
+  isChatEnabled?: true
+  isChatFollowersOnly?: true
+  isChatPremiumFollowersOnly?: true
 }
 
 export type StreamCountAggregateInputType = {
   id?: true
+  userId?: true
+  categoryId?: true
+  ingressId?: true
   title?: true
   thumbnailUrl?: true
-  ingressId?: true
   serverUrl?: true
   streamKey?: true
   isLive?: true
   createdAt?: true
   updatedAt?: true
-  userId?: true
-  categoryId?: true
+  isChatEnabled?: true
+  isChatFollowersOnly?: true
+  isChatPremiumFollowersOnly?: true
   _all?: true
 }
 
@@ -185,16 +203,19 @@ export type StreamGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalA
 
 export type StreamGroupByOutputType = {
   id: string
+  userId: string | null
+  categoryId: string | null
+  ingressId: string | null
   title: string
   thumbnailUrl: string | null
-  ingressId: string | null
   serverUrl: string | null
   streamKey: string | null
   isLive: boolean
   createdAt: Date
   updatedAt: Date
-  userId: string | null
-  categoryId: string | null
+  isChatEnabled: boolean
+  isChatFollowersOnly: boolean
+  isChatPremiumFollowersOnly: boolean
   _count: StreamCountAggregateOutputType | null
   _min: StreamMinAggregateOutputType | null
   _max: StreamMaxAggregateOutputType | null
@@ -220,43 +241,52 @@ export type StreamWhereInput = {
   OR?: Prisma.StreamWhereInput[]
   NOT?: Prisma.StreamWhereInput | Prisma.StreamWhereInput[]
   id?: Prisma.UuidFilter<"Stream"> | string
+  userId?: Prisma.UuidNullableFilter<"Stream"> | string | null
+  categoryId?: Prisma.UuidNullableFilter<"Stream"> | string | null
+  ingressId?: Prisma.StringNullableFilter<"Stream"> | string | null
   title?: Prisma.StringFilter<"Stream"> | string
   thumbnailUrl?: Prisma.StringNullableFilter<"Stream"> | string | null
-  ingressId?: Prisma.StringNullableFilter<"Stream"> | string | null
   serverUrl?: Prisma.StringNullableFilter<"Stream"> | string | null
   streamKey?: Prisma.StringNullableFilter<"Stream"> | string | null
   isLive?: Prisma.BoolFilter<"Stream"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Stream"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Stream"> | Date | string
-  userId?: Prisma.UuidNullableFilter<"Stream"> | string | null
-  categoryId?: Prisma.UuidNullableFilter<"Stream"> | string | null
+  isChatEnabled?: Prisma.BoolFilter<"Stream"> | boolean
+  isChatFollowersOnly?: Prisma.BoolFilter<"Stream"> | boolean
+  isChatPremiumFollowersOnly?: Prisma.BoolFilter<"Stream"> | boolean
   user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   category?: Prisma.XOR<Prisma.CategoryNullableScalarRelationFilter, Prisma.CategoryWhereInput> | null
+  chatMessages?: Prisma.ChatMessageListRelationFilter
 }
 
 export type StreamOrderByWithRelationInput = {
   id?: Prisma.SortOrder
+  userId?: Prisma.SortOrderInput | Prisma.SortOrder
+  categoryId?: Prisma.SortOrderInput | Prisma.SortOrder
+  ingressId?: Prisma.SortOrderInput | Prisma.SortOrder
   title?: Prisma.SortOrder
   thumbnailUrl?: Prisma.SortOrderInput | Prisma.SortOrder
-  ingressId?: Prisma.SortOrderInput | Prisma.SortOrder
   serverUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   streamKey?: Prisma.SortOrderInput | Prisma.SortOrder
   isLive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  userId?: Prisma.SortOrderInput | Prisma.SortOrder
-  categoryId?: Prisma.SortOrderInput | Prisma.SortOrder
+  isChatEnabled?: Prisma.SortOrder
+  isChatFollowersOnly?: Prisma.SortOrder
+  isChatPremiumFollowersOnly?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
   category?: Prisma.CategoryOrderByWithRelationInput
+  chatMessages?: Prisma.ChatMessageOrderByRelationAggregateInput
 }
 
 export type StreamWhereUniqueInput = Prisma.AtLeast<{
   id?: string
-  ingressId?: string
   userId?: string
+  ingressId?: string
   AND?: Prisma.StreamWhereInput | Prisma.StreamWhereInput[]
   OR?: Prisma.StreamWhereInput[]
   NOT?: Prisma.StreamWhereInput | Prisma.StreamWhereInput[]
+  categoryId?: Prisma.UuidNullableFilter<"Stream"> | string | null
   title?: Prisma.StringFilter<"Stream"> | string
   thumbnailUrl?: Prisma.StringNullableFilter<"Stream"> | string | null
   serverUrl?: Prisma.StringNullableFilter<"Stream"> | string | null
@@ -264,23 +294,29 @@ export type StreamWhereUniqueInput = Prisma.AtLeast<{
   isLive?: Prisma.BoolFilter<"Stream"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Stream"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Stream"> | Date | string
-  categoryId?: Prisma.UuidNullableFilter<"Stream"> | string | null
+  isChatEnabled?: Prisma.BoolFilter<"Stream"> | boolean
+  isChatFollowersOnly?: Prisma.BoolFilter<"Stream"> | boolean
+  isChatPremiumFollowersOnly?: Prisma.BoolFilter<"Stream"> | boolean
   user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   category?: Prisma.XOR<Prisma.CategoryNullableScalarRelationFilter, Prisma.CategoryWhereInput> | null
-}, "id" | "ingressId" | "userId">
+  chatMessages?: Prisma.ChatMessageListRelationFilter
+}, "id" | "userId" | "ingressId">
 
 export type StreamOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
+  userId?: Prisma.SortOrderInput | Prisma.SortOrder
+  categoryId?: Prisma.SortOrderInput | Prisma.SortOrder
+  ingressId?: Prisma.SortOrderInput | Prisma.SortOrder
   title?: Prisma.SortOrder
   thumbnailUrl?: Prisma.SortOrderInput | Prisma.SortOrder
-  ingressId?: Prisma.SortOrderInput | Prisma.SortOrder
   serverUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   streamKey?: Prisma.SortOrderInput | Prisma.SortOrder
   isLive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  userId?: Prisma.SortOrderInput | Prisma.SortOrder
-  categoryId?: Prisma.SortOrderInput | Prisma.SortOrder
+  isChatEnabled?: Prisma.SortOrder
+  isChatFollowersOnly?: Prisma.SortOrder
+  isChatPremiumFollowersOnly?: Prisma.SortOrder
   _count?: Prisma.StreamCountOrderByAggregateInput
   _max?: Prisma.StreamMaxOrderByAggregateInput
   _min?: Prisma.StreamMinOrderByAggregateInput
@@ -291,112 +327,140 @@ export type StreamScalarWhereWithAggregatesInput = {
   OR?: Prisma.StreamScalarWhereWithAggregatesInput[]
   NOT?: Prisma.StreamScalarWhereWithAggregatesInput | Prisma.StreamScalarWhereWithAggregatesInput[]
   id?: Prisma.UuidWithAggregatesFilter<"Stream"> | string
+  userId?: Prisma.UuidNullableWithAggregatesFilter<"Stream"> | string | null
+  categoryId?: Prisma.UuidNullableWithAggregatesFilter<"Stream"> | string | null
+  ingressId?: Prisma.StringNullableWithAggregatesFilter<"Stream"> | string | null
   title?: Prisma.StringWithAggregatesFilter<"Stream"> | string
   thumbnailUrl?: Prisma.StringNullableWithAggregatesFilter<"Stream"> | string | null
-  ingressId?: Prisma.StringNullableWithAggregatesFilter<"Stream"> | string | null
   serverUrl?: Prisma.StringNullableWithAggregatesFilter<"Stream"> | string | null
   streamKey?: Prisma.StringNullableWithAggregatesFilter<"Stream"> | string | null
   isLive?: Prisma.BoolWithAggregatesFilter<"Stream"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Stream"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Stream"> | Date | string
-  userId?: Prisma.UuidNullableWithAggregatesFilter<"Stream"> | string | null
-  categoryId?: Prisma.UuidNullableWithAggregatesFilter<"Stream"> | string | null
+  isChatEnabled?: Prisma.BoolWithAggregatesFilter<"Stream"> | boolean
+  isChatFollowersOnly?: Prisma.BoolWithAggregatesFilter<"Stream"> | boolean
+  isChatPremiumFollowersOnly?: Prisma.BoolWithAggregatesFilter<"Stream"> | boolean
 }
 
 export type StreamCreateInput = {
   id?: string
+  ingressId?: string | null
   title: string
   thumbnailUrl?: string | null
-  ingressId?: string | null
   serverUrl?: string | null
   streamKey?: string | null
   isLive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  isChatEnabled?: boolean
+  isChatFollowersOnly?: boolean
+  isChatPremiumFollowersOnly?: boolean
   user?: Prisma.UserCreateNestedOneWithoutStreamInput
   category?: Prisma.CategoryCreateNestedOneWithoutStreamsInput
+  chatMessages?: Prisma.ChatMessageCreateNestedManyWithoutStreamInput
 }
 
 export type StreamUncheckedCreateInput = {
   id?: string
+  userId?: string | null
+  categoryId?: string | null
+  ingressId?: string | null
   title: string
   thumbnailUrl?: string | null
-  ingressId?: string | null
   serverUrl?: string | null
   streamKey?: string | null
   isLive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  userId?: string | null
-  categoryId?: string | null
+  isChatEnabled?: boolean
+  isChatFollowersOnly?: boolean
+  isChatPremiumFollowersOnly?: boolean
+  chatMessages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutStreamInput
 }
 
 export type StreamUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  ingressId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   thumbnailUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ingressId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   serverUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   streamKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isLive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isChatEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isChatFollowersOnly?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isChatPremiumFollowersOnly?: Prisma.BoolFieldUpdateOperationsInput | boolean
   user?: Prisma.UserUpdateOneWithoutStreamNestedInput
   category?: Prisma.CategoryUpdateOneWithoutStreamsNestedInput
+  chatMessages?: Prisma.ChatMessageUpdateManyWithoutStreamNestedInput
 }
 
 export type StreamUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ingressId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   thumbnailUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ingressId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   serverUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   streamKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isLive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isChatEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isChatFollowersOnly?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isChatPremiumFollowersOnly?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  chatMessages?: Prisma.ChatMessageUncheckedUpdateManyWithoutStreamNestedInput
 }
 
 export type StreamCreateManyInput = {
   id?: string
+  userId?: string | null
+  categoryId?: string | null
+  ingressId?: string | null
   title: string
   thumbnailUrl?: string | null
-  ingressId?: string | null
   serverUrl?: string | null
   streamKey?: string | null
   isLive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  userId?: string | null
-  categoryId?: string | null
+  isChatEnabled?: boolean
+  isChatFollowersOnly?: boolean
+  isChatPremiumFollowersOnly?: boolean
 }
 
 export type StreamUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  ingressId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   thumbnailUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ingressId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   serverUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   streamKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isLive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isChatEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isChatFollowersOnly?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isChatPremiumFollowersOnly?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type StreamUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ingressId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   thumbnailUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ingressId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   serverUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   streamKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isLive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isChatEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isChatFollowersOnly?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isChatPremiumFollowersOnly?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type StreamNullableScalarRelationFilter = {
@@ -406,44 +470,53 @@ export type StreamNullableScalarRelationFilter = {
 
 export type StreamCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
+  categoryId?: Prisma.SortOrder
+  ingressId?: Prisma.SortOrder
   title?: Prisma.SortOrder
   thumbnailUrl?: Prisma.SortOrder
-  ingressId?: Prisma.SortOrder
   serverUrl?: Prisma.SortOrder
   streamKey?: Prisma.SortOrder
   isLive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
-  categoryId?: Prisma.SortOrder
+  isChatEnabled?: Prisma.SortOrder
+  isChatFollowersOnly?: Prisma.SortOrder
+  isChatPremiumFollowersOnly?: Prisma.SortOrder
 }
 
 export type StreamMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
+  categoryId?: Prisma.SortOrder
+  ingressId?: Prisma.SortOrder
   title?: Prisma.SortOrder
   thumbnailUrl?: Prisma.SortOrder
-  ingressId?: Prisma.SortOrder
   serverUrl?: Prisma.SortOrder
   streamKey?: Prisma.SortOrder
   isLive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
-  categoryId?: Prisma.SortOrder
+  isChatEnabled?: Prisma.SortOrder
+  isChatFollowersOnly?: Prisma.SortOrder
+  isChatPremiumFollowersOnly?: Prisma.SortOrder
 }
 
 export type StreamMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
+  categoryId?: Prisma.SortOrder
+  ingressId?: Prisma.SortOrder
   title?: Prisma.SortOrder
   thumbnailUrl?: Prisma.SortOrder
-  ingressId?: Prisma.SortOrder
   serverUrl?: Prisma.SortOrder
   streamKey?: Prisma.SortOrder
   isLive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
-  categoryId?: Prisma.SortOrder
+  isChatEnabled?: Prisma.SortOrder
+  isChatFollowersOnly?: Prisma.SortOrder
+  isChatPremiumFollowersOnly?: Prisma.SortOrder
 }
 
 export type StreamListRelationFilter = {
@@ -454,6 +527,11 @@ export type StreamListRelationFilter = {
 
 export type StreamOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type StreamScalarRelationFilter = {
+  is?: Prisma.StreamWhereInput
+  isNot?: Prisma.StreamWhereInput
 }
 
 export type StreamCreateNestedOneWithoutUserInput = {
@@ -530,30 +608,52 @@ export type StreamUncheckedUpdateManyWithoutCategoryNestedInput = {
   deleteMany?: Prisma.StreamScalarWhereInput | Prisma.StreamScalarWhereInput[]
 }
 
+export type StreamCreateNestedOneWithoutChatMessagesInput = {
+  create?: Prisma.XOR<Prisma.StreamCreateWithoutChatMessagesInput, Prisma.StreamUncheckedCreateWithoutChatMessagesInput>
+  connectOrCreate?: Prisma.StreamCreateOrConnectWithoutChatMessagesInput
+  connect?: Prisma.StreamWhereUniqueInput
+}
+
+export type StreamUpdateOneRequiredWithoutChatMessagesNestedInput = {
+  create?: Prisma.XOR<Prisma.StreamCreateWithoutChatMessagesInput, Prisma.StreamUncheckedCreateWithoutChatMessagesInput>
+  connectOrCreate?: Prisma.StreamCreateOrConnectWithoutChatMessagesInput
+  upsert?: Prisma.StreamUpsertWithoutChatMessagesInput
+  connect?: Prisma.StreamWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.StreamUpdateToOneWithWhereWithoutChatMessagesInput, Prisma.StreamUpdateWithoutChatMessagesInput>, Prisma.StreamUncheckedUpdateWithoutChatMessagesInput>
+}
+
 export type StreamCreateWithoutUserInput = {
   id?: string
+  ingressId?: string | null
   title: string
   thumbnailUrl?: string | null
-  ingressId?: string | null
   serverUrl?: string | null
   streamKey?: string | null
   isLive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  isChatEnabled?: boolean
+  isChatFollowersOnly?: boolean
+  isChatPremiumFollowersOnly?: boolean
   category?: Prisma.CategoryCreateNestedOneWithoutStreamsInput
+  chatMessages?: Prisma.ChatMessageCreateNestedManyWithoutStreamInput
 }
 
 export type StreamUncheckedCreateWithoutUserInput = {
   id?: string
+  categoryId?: string | null
+  ingressId?: string | null
   title: string
   thumbnailUrl?: string | null
-  ingressId?: string | null
   serverUrl?: string | null
   streamKey?: string | null
   isLive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  categoryId?: string | null
+  isChatEnabled?: boolean
+  isChatFollowersOnly?: boolean
+  isChatPremiumFollowersOnly?: boolean
+  chatMessages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutStreamInput
 }
 
 export type StreamCreateOrConnectWithoutUserInput = {
@@ -574,54 +674,70 @@ export type StreamUpdateToOneWithWhereWithoutUserInput = {
 
 export type StreamUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  ingressId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   thumbnailUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ingressId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   serverUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   streamKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isLive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isChatEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isChatFollowersOnly?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isChatPremiumFollowersOnly?: Prisma.BoolFieldUpdateOperationsInput | boolean
   category?: Prisma.CategoryUpdateOneWithoutStreamsNestedInput
+  chatMessages?: Prisma.ChatMessageUpdateManyWithoutStreamNestedInput
 }
 
 export type StreamUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ingressId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   thumbnailUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ingressId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   serverUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   streamKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isLive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isChatEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isChatFollowersOnly?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isChatPremiumFollowersOnly?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  chatMessages?: Prisma.ChatMessageUncheckedUpdateManyWithoutStreamNestedInput
 }
 
 export type StreamCreateWithoutCategoryInput = {
   id?: string
+  ingressId?: string | null
   title: string
   thumbnailUrl?: string | null
-  ingressId?: string | null
   serverUrl?: string | null
   streamKey?: string | null
   isLive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  isChatEnabled?: boolean
+  isChatFollowersOnly?: boolean
+  isChatPremiumFollowersOnly?: boolean
   user?: Prisma.UserCreateNestedOneWithoutStreamInput
+  chatMessages?: Prisma.ChatMessageCreateNestedManyWithoutStreamInput
 }
 
 export type StreamUncheckedCreateWithoutCategoryInput = {
   id?: string
+  userId?: string | null
+  ingressId?: string | null
   title: string
   thumbnailUrl?: string | null
-  ingressId?: string | null
   serverUrl?: string | null
   streamKey?: string | null
   isLive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  userId?: string | null
+  isChatEnabled?: boolean
+  isChatFollowersOnly?: boolean
+  isChatPremiumFollowersOnly?: boolean
+  chatMessages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutStreamInput
 }
 
 export type StreamCreateOrConnectWithoutCategoryInput = {
@@ -655,138 +771,284 @@ export type StreamScalarWhereInput = {
   OR?: Prisma.StreamScalarWhereInput[]
   NOT?: Prisma.StreamScalarWhereInput | Prisma.StreamScalarWhereInput[]
   id?: Prisma.UuidFilter<"Stream"> | string
+  userId?: Prisma.UuidNullableFilter<"Stream"> | string | null
+  categoryId?: Prisma.UuidNullableFilter<"Stream"> | string | null
+  ingressId?: Prisma.StringNullableFilter<"Stream"> | string | null
   title?: Prisma.StringFilter<"Stream"> | string
   thumbnailUrl?: Prisma.StringNullableFilter<"Stream"> | string | null
-  ingressId?: Prisma.StringNullableFilter<"Stream"> | string | null
   serverUrl?: Prisma.StringNullableFilter<"Stream"> | string | null
   streamKey?: Prisma.StringNullableFilter<"Stream"> | string | null
   isLive?: Prisma.BoolFilter<"Stream"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Stream"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Stream"> | Date | string
-  userId?: Prisma.UuidNullableFilter<"Stream"> | string | null
-  categoryId?: Prisma.UuidNullableFilter<"Stream"> | string | null
+  isChatEnabled?: Prisma.BoolFilter<"Stream"> | boolean
+  isChatFollowersOnly?: Prisma.BoolFilter<"Stream"> | boolean
+  isChatPremiumFollowersOnly?: Prisma.BoolFilter<"Stream"> | boolean
 }
 
-export type StreamCreateManyCategoryInput = {
+export type StreamCreateWithoutChatMessagesInput = {
   id?: string
+  ingressId?: string | null
   title: string
   thumbnailUrl?: string | null
-  ingressId?: string | null
   serverUrl?: string | null
   streamKey?: string | null
   isLive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  isChatEnabled?: boolean
+  isChatFollowersOnly?: boolean
+  isChatPremiumFollowersOnly?: boolean
+  user?: Prisma.UserCreateNestedOneWithoutStreamInput
+  category?: Prisma.CategoryCreateNestedOneWithoutStreamsInput
+}
+
+export type StreamUncheckedCreateWithoutChatMessagesInput = {
+  id?: string
   userId?: string | null
+  categoryId?: string | null
+  ingressId?: string | null
+  title: string
+  thumbnailUrl?: string | null
+  serverUrl?: string | null
+  streamKey?: string | null
+  isLive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  isChatEnabled?: boolean
+  isChatFollowersOnly?: boolean
+  isChatPremiumFollowersOnly?: boolean
+}
+
+export type StreamCreateOrConnectWithoutChatMessagesInput = {
+  where: Prisma.StreamWhereUniqueInput
+  create: Prisma.XOR<Prisma.StreamCreateWithoutChatMessagesInput, Prisma.StreamUncheckedCreateWithoutChatMessagesInput>
+}
+
+export type StreamUpsertWithoutChatMessagesInput = {
+  update: Prisma.XOR<Prisma.StreamUpdateWithoutChatMessagesInput, Prisma.StreamUncheckedUpdateWithoutChatMessagesInput>
+  create: Prisma.XOR<Prisma.StreamCreateWithoutChatMessagesInput, Prisma.StreamUncheckedCreateWithoutChatMessagesInput>
+  where?: Prisma.StreamWhereInput
+}
+
+export type StreamUpdateToOneWithWhereWithoutChatMessagesInput = {
+  where?: Prisma.StreamWhereInput
+  data: Prisma.XOR<Prisma.StreamUpdateWithoutChatMessagesInput, Prisma.StreamUncheckedUpdateWithoutChatMessagesInput>
+}
+
+export type StreamUpdateWithoutChatMessagesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  ingressId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  thumbnailUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serverUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  streamKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isLive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isChatEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isChatFollowersOnly?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isChatPremiumFollowersOnly?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  user?: Prisma.UserUpdateOneWithoutStreamNestedInput
+  category?: Prisma.CategoryUpdateOneWithoutStreamsNestedInput
+}
+
+export type StreamUncheckedUpdateWithoutChatMessagesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ingressId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  thumbnailUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  serverUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  streamKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isLive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isChatEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isChatFollowersOnly?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isChatPremiumFollowersOnly?: Prisma.BoolFieldUpdateOperationsInput | boolean
+}
+
+export type StreamCreateManyCategoryInput = {
+  id?: string
+  userId?: string | null
+  ingressId?: string | null
+  title: string
+  thumbnailUrl?: string | null
+  serverUrl?: string | null
+  streamKey?: string | null
+  isLive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  isChatEnabled?: boolean
+  isChatFollowersOnly?: boolean
+  isChatPremiumFollowersOnly?: boolean
 }
 
 export type StreamUpdateWithoutCategoryInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  ingressId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   thumbnailUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ingressId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   serverUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   streamKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isLive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isChatEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isChatFollowersOnly?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isChatPremiumFollowersOnly?: Prisma.BoolFieldUpdateOperationsInput | boolean
   user?: Prisma.UserUpdateOneWithoutStreamNestedInput
+  chatMessages?: Prisma.ChatMessageUpdateManyWithoutStreamNestedInput
 }
 
 export type StreamUncheckedUpdateWithoutCategoryInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ingressId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   thumbnailUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ingressId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   serverUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   streamKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isLive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isChatEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isChatFollowersOnly?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isChatPremiumFollowersOnly?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  chatMessages?: Prisma.ChatMessageUncheckedUpdateManyWithoutStreamNestedInput
 }
 
 export type StreamUncheckedUpdateManyWithoutCategoryInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ingressId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   thumbnailUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ingressId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   serverUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   streamKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isLive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isChatEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isChatFollowersOnly?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isChatPremiumFollowersOnly?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
+
+/**
+ * Count Type StreamCountOutputType
+ */
+
+export type StreamCountOutputType = {
+  chatMessages: number
+}
+
+export type StreamCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  chatMessages?: boolean | StreamCountOutputTypeCountChatMessagesArgs
+}
+
+/**
+ * StreamCountOutputType without action
+ */
+export type StreamCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the StreamCountOutputType
+   */
+  select?: Prisma.StreamCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * StreamCountOutputType without action
+ */
+export type StreamCountOutputTypeCountChatMessagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ChatMessageWhereInput
+}
 
 
 export type StreamSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  userId?: boolean
+  categoryId?: boolean
+  ingressId?: boolean
   title?: boolean
   thumbnailUrl?: boolean
-  ingressId?: boolean
   serverUrl?: boolean
   streamKey?: boolean
   isLive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  userId?: boolean
-  categoryId?: boolean
+  isChatEnabled?: boolean
+  isChatFollowersOnly?: boolean
+  isChatPremiumFollowersOnly?: boolean
   user?: boolean | Prisma.Stream$userArgs<ExtArgs>
   category?: boolean | Prisma.Stream$categoryArgs<ExtArgs>
+  chatMessages?: boolean | Prisma.Stream$chatMessagesArgs<ExtArgs>
+  _count?: boolean | Prisma.StreamCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["stream"]>
 
 export type StreamSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  userId?: boolean
+  categoryId?: boolean
+  ingressId?: boolean
   title?: boolean
   thumbnailUrl?: boolean
-  ingressId?: boolean
   serverUrl?: boolean
   streamKey?: boolean
   isLive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  userId?: boolean
-  categoryId?: boolean
+  isChatEnabled?: boolean
+  isChatFollowersOnly?: boolean
+  isChatPremiumFollowersOnly?: boolean
   user?: boolean | Prisma.Stream$userArgs<ExtArgs>
   category?: boolean | Prisma.Stream$categoryArgs<ExtArgs>
 }, ExtArgs["result"]["stream"]>
 
 export type StreamSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  userId?: boolean
+  categoryId?: boolean
+  ingressId?: boolean
   title?: boolean
   thumbnailUrl?: boolean
-  ingressId?: boolean
   serverUrl?: boolean
   streamKey?: boolean
   isLive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  userId?: boolean
-  categoryId?: boolean
+  isChatEnabled?: boolean
+  isChatFollowersOnly?: boolean
+  isChatPremiumFollowersOnly?: boolean
   user?: boolean | Prisma.Stream$userArgs<ExtArgs>
   category?: boolean | Prisma.Stream$categoryArgs<ExtArgs>
 }, ExtArgs["result"]["stream"]>
 
 export type StreamSelectScalar = {
   id?: boolean
+  userId?: boolean
+  categoryId?: boolean
+  ingressId?: boolean
   title?: boolean
   thumbnailUrl?: boolean
-  ingressId?: boolean
   serverUrl?: boolean
   streamKey?: boolean
   isLive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  userId?: boolean
-  categoryId?: boolean
+  isChatEnabled?: boolean
+  isChatFollowersOnly?: boolean
+  isChatPremiumFollowersOnly?: boolean
 }
 
-export type StreamOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "thumbnailUrl" | "ingressId" | "serverUrl" | "streamKey" | "isLive" | "createdAt" | "updatedAt" | "userId" | "categoryId", ExtArgs["result"]["stream"]>
+export type StreamOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "categoryId" | "ingressId" | "title" | "thumbnailUrl" | "serverUrl" | "streamKey" | "isLive" | "createdAt" | "updatedAt" | "isChatEnabled" | "isChatFollowersOnly" | "isChatPremiumFollowersOnly", ExtArgs["result"]["stream"]>
 export type StreamInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.Stream$userArgs<ExtArgs>
   category?: boolean | Prisma.Stream$categoryArgs<ExtArgs>
+  chatMessages?: boolean | Prisma.Stream$chatMessagesArgs<ExtArgs>
+  _count?: boolean | Prisma.StreamCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type StreamIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.Stream$userArgs<ExtArgs>
@@ -802,19 +1064,23 @@ export type $StreamPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
   objects: {
     user: Prisma.$UserPayload<ExtArgs> | null
     category: Prisma.$CategoryPayload<ExtArgs> | null
+    chatMessages: Prisma.$ChatMessagePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
+    userId: string | null
+    categoryId: string | null
+    ingressId: string | null
     title: string
     thumbnailUrl: string | null
-    ingressId: string | null
     serverUrl: string | null
     streamKey: string | null
     isLive: boolean
     createdAt: Date
     updatedAt: Date
-    userId: string | null
-    categoryId: string | null
+    isChatEnabled: boolean
+    isChatFollowersOnly: boolean
+    isChatPremiumFollowersOnly: boolean
   }, ExtArgs["result"]["stream"]>
   composites: {}
 }
@@ -1211,6 +1477,7 @@ export interface Prisma__StreamClient<T, Null = never, ExtArgs extends runtime.T
   readonly [Symbol.toStringTag]: "PrismaPromise"
   user<T extends Prisma.Stream$userArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Stream$userArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   category<T extends Prisma.Stream$categoryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Stream$categoryArgs<ExtArgs>>): Prisma.Prisma__CategoryClient<runtime.Types.Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  chatMessages<T extends Prisma.Stream$chatMessagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Stream$chatMessagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChatMessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1241,16 +1508,19 @@ export interface Prisma__StreamClient<T, Null = never, ExtArgs extends runtime.T
  */
 export interface StreamFieldRefs {
   readonly id: Prisma.FieldRef<"Stream", 'String'>
+  readonly userId: Prisma.FieldRef<"Stream", 'String'>
+  readonly categoryId: Prisma.FieldRef<"Stream", 'String'>
+  readonly ingressId: Prisma.FieldRef<"Stream", 'String'>
   readonly title: Prisma.FieldRef<"Stream", 'String'>
   readonly thumbnailUrl: Prisma.FieldRef<"Stream", 'String'>
-  readonly ingressId: Prisma.FieldRef<"Stream", 'String'>
   readonly serverUrl: Prisma.FieldRef<"Stream", 'String'>
   readonly streamKey: Prisma.FieldRef<"Stream", 'String'>
   readonly isLive: Prisma.FieldRef<"Stream", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"Stream", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Stream", 'DateTime'>
-  readonly userId: Prisma.FieldRef<"Stream", 'String'>
-  readonly categoryId: Prisma.FieldRef<"Stream", 'String'>
+  readonly isChatEnabled: Prisma.FieldRef<"Stream", 'Boolean'>
+  readonly isChatFollowersOnly: Prisma.FieldRef<"Stream", 'Boolean'>
+  readonly isChatPremiumFollowersOnly: Prisma.FieldRef<"Stream", 'Boolean'>
 }
     
 
@@ -1687,6 +1957,30 @@ export type Stream$categoryArgs<ExtArgs extends runtime.Types.Extensions.Interna
    */
   include?: Prisma.CategoryInclude<ExtArgs> | null
   where?: Prisma.CategoryWhereInput
+}
+
+/**
+ * Stream.chatMessages
+ */
+export type Stream$chatMessagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ChatMessage
+   */
+  select?: Prisma.ChatMessageSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ChatMessage
+   */
+  omit?: Prisma.ChatMessageOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ChatMessageInclude<ExtArgs> | null
+  where?: Prisma.ChatMessageWhereInput
+  orderBy?: Prisma.ChatMessageOrderByWithRelationInput | Prisma.ChatMessageOrderByWithRelationInput[]
+  cursor?: Prisma.ChatMessageWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ChatMessageScalarFieldEnum | Prisma.ChatMessageScalarFieldEnum[]
 }
 
 /**

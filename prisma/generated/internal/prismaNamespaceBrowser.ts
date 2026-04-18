@@ -55,7 +55,8 @@ export const ModelName = {
   Token: 'Token',
   SocialLink: 'SocialLink',
   Stream: 'Stream',
-  Category: 'Category'
+  Category: 'Category',
+  ChatMessage: 'ChatMessage'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -96,12 +97,12 @@ export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof User
 
 export const TokenScalarFieldEnum = {
   id: 'id',
+  userId: 'userId',
   token: 'token',
   type: 'type',
   expiresAt: 'expiresAt',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  userId: 'userId'
+  updatedAt: 'updatedAt'
 } as const
 
 export type TokenScalarFieldEnum = (typeof TokenScalarFieldEnum)[keyof typeof TokenScalarFieldEnum]
@@ -109,12 +110,12 @@ export type TokenScalarFieldEnum = (typeof TokenScalarFieldEnum)[keyof typeof To
 
 export const SocialLinkScalarFieldEnum = {
   id: 'id',
+  userId: 'userId',
   name: 'name',
   url: 'url',
   position: 'position',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  userId: 'userId'
+  updatedAt: 'updatedAt'
 } as const
 
 export type SocialLinkScalarFieldEnum = (typeof SocialLinkScalarFieldEnum)[keyof typeof SocialLinkScalarFieldEnum]
@@ -122,16 +123,19 @@ export type SocialLinkScalarFieldEnum = (typeof SocialLinkScalarFieldEnum)[keyof
 
 export const StreamScalarFieldEnum = {
   id: 'id',
+  userId: 'userId',
+  categoryId: 'categoryId',
+  ingressId: 'ingressId',
   title: 'title',
   thumbnailUrl: 'thumbnailUrl',
-  ingressId: 'ingressId',
   serverUrl: 'serverUrl',
   streamKey: 'streamKey',
   isLive: 'isLive',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  userId: 'userId',
-  categoryId: 'categoryId'
+  isChatEnabled: 'isChatEnabled',
+  isChatFollowersOnly: 'isChatFollowersOnly',
+  isChatPremiumFollowersOnly: 'isChatPremiumFollowersOnly'
 } as const
 
 export type StreamScalarFieldEnum = (typeof StreamScalarFieldEnum)[keyof typeof StreamScalarFieldEnum]
@@ -148,6 +152,18 @@ export const CategoryScalarFieldEnum = {
 } as const
 
 export type CategoryScalarFieldEnum = (typeof CategoryScalarFieldEnum)[keyof typeof CategoryScalarFieldEnum]
+
+
+export const ChatMessageScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  streamId: 'streamId',
+  text: 'text',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ChatMessageScalarFieldEnum = (typeof ChatMessageScalarFieldEnum)[keyof typeof ChatMessageScalarFieldEnum]
 
 
 export const SortOrder = {
