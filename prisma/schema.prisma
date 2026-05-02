@@ -27,6 +27,8 @@ model User {
   socialLinks   SocialLink[]
   stream        Stream?
   chatMessages  ChatMessage[]
+  followers Follow[] @relation(name: "followers")
+  followings Follow[] @relation(name: "followings")
 
   @@map("users")
 }
@@ -111,4 +113,20 @@ model ChatMessage {
   stream    Stream   @relation(fields: [streamId], references: [id], onDelete: Cascade)
 
   @@map("chat_messages")
+}
+
+
+model Follow {
+  id          String   @id @default(uuid()) @db.Uuid
+  follower    User     @relation(name: "followers", fields: [followerId], references: [id], onDelete: Cascade)
+  followerId  String   @map("follower_id") @db.Uuid
+  following   User     @relation(name: "followings", fields: [followingId], references: [id], onDelete: Cascade)
+  followingId String   @map("following_id") @db.Uuid
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@unique([followerId, followingId])
+  @@index([followerId])
+  @@index([followingId])
+  @@map("follows")
 }

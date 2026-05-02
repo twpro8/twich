@@ -56,7 +56,8 @@ export const ModelName = {
   SocialLink: 'SocialLink',
   Stream: 'Stream',
   Category: 'Category',
-  ChatMessage: 'ChatMessage'
+  ChatMessage: 'ChatMessage',
+  Follow: 'Follow'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -164,6 +165,17 @@ export const ChatMessageScalarFieldEnum = {
 } as const
 
 export type ChatMessageScalarFieldEnum = (typeof ChatMessageScalarFieldEnum)[keyof typeof ChatMessageScalarFieldEnum]
+
+
+export const FollowScalarFieldEnum = {
+  id: 'id',
+  followerId: 'followerId',
+  followingId: 'followingId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type FollowScalarFieldEnum = (typeof FollowScalarFieldEnum)[keyof typeof FollowScalarFieldEnum]
 
 
 export const SortOrder = {
