@@ -94,6 +94,16 @@ input FiltersInput {
   skip: Int! = 5
 }
 
+type FollowModel {
+  createdAt: DateTime!
+  follower: UserModel!
+  followerId: String!
+  following: UserModel!
+  followingId: String!
+  id: String!
+  updatedAt: DateTime!
+}
+
 input GenerateStreamTokenInput {
   channelId: String!
   userId: String!
@@ -132,6 +142,7 @@ type Mutation {
   deleteSocialLink(id: String!): Boolean!
   disableTotp: Boolean!
   enableTotp(data: EnableTotpInput!): Boolean!
+  follow(channelId: String!): Boolean!
   generateStreamToken(data: GenerateStreamTokenInput!): GenerateStreamTokenModel!
   loginUser(data: LoginInput!): AuthResultModel!
   logoutUser: Boolean!
@@ -142,6 +153,7 @@ type Mutation {
   reorderSocialLinks(data: [ChangeSocialLinksOrderInput!]!): Boolean!
   resetPassword(data: ResetPasswordInput!): Boolean!
   sendChatMessage(data: SendMessageInput!): ChatMessageModel!
+  unfollow(channelId: String!): Boolean!
   updateSocialLink(data: SocialLinkInput!, id: String!): Boolean!
   verifyEmail(data: VerificationInput!): UserModel!
 }
@@ -158,6 +170,8 @@ type Query {
   findCategoryBySlug(slug: String!): CategoryModel!
   findCurrentSession: SessionModel!
   findMessagesByStream(streamId: String!): [ChatMessageModel!]!
+  findMyFollowers: [FollowModel!]!
+  findMyFollows: [FollowModel!]!
   findProfile: UserModel!
   findRandomCategories: [CategoryModel!]!
   findRandomStreams: [StreamModel!]!
