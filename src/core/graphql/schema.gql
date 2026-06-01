@@ -168,13 +168,16 @@ type Query {
   findAllCategories: [CategoryModel!]!
   findAllStreams(filters: FiltersInput!): [StreamModel!]!
   findCategoryBySlug(slug: String!): CategoryModel!
+  findChannelByUsername(username: String!): UserModel!
   findCurrentSession: SessionModel!
+  findFollowersCountByChannelId(channelId: String!): Float!
   findMessagesByStream(streamId: String!): [ChatMessageModel!]!
   findMyFollowers: [FollowModel!]!
   findMyFollows: [FollowModel!]!
   findProfile: UserModel!
   findRandomCategories: [CategoryModel!]!
   findRandomStreams: [StreamModel!]!
+  findRecommendedChannels: [UserModel!]!
   findSessionByUser: [SessionModel!]!
   findSocialLinks: [SocialLinkModel!]!
   generateTotpKey: TotpModel!
@@ -254,6 +257,8 @@ type UserModel {
   bio: String
   createdAt: DateTime!
   email: String!
+  followers: [FollowModel!]!
+  followings: [FollowModel!]!
   id: ID!
   isActive: Boolean!
   isVerified: Boolean!

@@ -1,6 +1,7 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
 import { SocialLinkModel } from '@/src/modules/auth/profile/models/social-link.model';
 import { StreamModel } from '@/src/modules/stream/models/stream.model';
+import { FollowModel } from '@/src/modules/follow/models/follow.model';
 
 @ObjectType()
 export class UserModel {
@@ -43,4 +44,10 @@ export class UserModel {
 
   @Field(() => StreamModel, { nullable: true })
   stream: StreamModel | null;
+
+  @Field(() => [FollowModel])
+  followers: FollowModel[];
+
+  @Field(() => [FollowModel])
+  followings: FollowModel[];
 }
