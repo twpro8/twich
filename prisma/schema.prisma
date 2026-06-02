@@ -53,6 +53,7 @@ enum TokenType {
   EMAIL_VERIFICATION
   PASSWORD_RESET
   ACCOUNT_DEACTIVATION
+  TELEGRAM_AUTH
 
   @@map("token_types")
 }
