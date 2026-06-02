@@ -9,26 +9,29 @@ datasource db {
 }
 
 model User {
-  id            String        @id @default(uuid()) @db.Uuid
-  email         String        @unique
-  password      String
-  username      String        @unique
-  name          String
-  avatar        String?
-  bio           String?
-  isVerified    Boolean       @default(false) @map("is_verified")
-  isActive      Boolean       @default(false) @map("is_active")
-  isDeactivated Boolean       @default(false) @map("is_deactivated")
-  deactivatedAt DateTime?     @map("deactivated_at")
-  createdAt     DateTime      @default(now()) @map("created_at")
-  updatedAt     DateTime      @updatedAt @map("updated_at")
-  totpKey       String?       @map("totp_key")
-  tokens        Token[]
-  socialLinks   SocialLink[]
-  stream        Stream?
-  chatMessages  ChatMessage[]
-  followers Follow[] @relation(name: "followers")
-  followings Follow[] @relation(name: "followings")
+  id                   String                @id @default(uuid()) @db.Uuid
+  email                String                @unique
+  password             String
+  username             String                @unique
+  name                 String
+  avatar               String?
+  bio                  String?
+  isVerified           Boolean               @default(false) @map("is_verified")
+  isActive             Boolean               @default(false) @map("is_active")
+  isDeactivated        Boolean               @default(false) @map("is_deactivated")
+  deactivatedAt        DateTime?             @map("deactivated_at")
+  createdAt            DateTime              @default(now()) @map("created_at")
+  updatedAt            DateTime              @updatedAt @map("updated_at")
+  totpKey              String?               @map("totp_key")
+  tokens               Token[]
+  socialLinks          SocialLink[]
+  stream               Stream?
+  chatMessages         ChatMessage[]
+  followers            Follow[]              @relation(name: "followers")
+  followings           Follow[]              @relation(name: "followings")
+  telegram_id          String?               @map("telegram_id")
+  notification         Notification[]
+  notificationSettings NotificationSettings?
 
   @@map("users")
 }
@@ -115,7 +118,6 @@ model ChatMessage {
   @@map("chat_messages")
 }
 
-
 model Follow {
   id          String   @id @default(uuid()) @db.Uuid
   follower    User     @relation(name: "followers", fields: [followerId], references: [id], onDelete: Cascade)
@@ -129,4 +131,39 @@ model Follow {
   @@index([followerId])
   @@index([followingId])
   @@map("follows")
+}
+
+model Notification {
+  id        String           @id @default(uuid()) @db.Uuid
+  message   String
+  type      NotificationType
+  isRead    Boolean          @default(false) @map("is_read")
+  createdAt DateTime         @default(now()) @map("created_at")
+  updatedAt DateTime         @updatedAt @map("updated_at")
+  user      User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String           @map("user_id") @db.Uuid
+
+  @@map("notifications")
+}
+
+model NotificationSettings {
+  id        String   @id @default(uuid()) @db.Uuid
+  site      Boolean  @default(false)
+  telegram  Boolean  @default(false)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  userId    String   @unique @map("user_id") @db.Uuid
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("notification_settings")
+}
+
+enum NotificationType {
+  STREAM_START
+  NEW_FOLLOWER
+  NEW_SPONSORSHIP
+  ENABLE_TWO_FACTOR
+  CHANNEL_VERIFIED
+
+  @@map("notification_types")
 }

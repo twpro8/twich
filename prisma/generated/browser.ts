@@ -52,3 +52,13 @@ export type ChatMessage = Prisma.ChatMessageModel
  * 
  */
 export type Follow = Prisma.FollowModel
+/**
+ * Model Notification
+ * 
+ */
+export type Notification = Prisma.NotificationModel
+/**
+ * Model NotificationSettings
+ * 
+ */
+export type NotificationSettings = Prisma.NotificationSettingsModel

@@ -39,6 +39,7 @@ export type UserMinAggregateOutputType = {
   createdAt: Date | null
   updatedAt: Date | null
   totpKey: string | null
+  telegram_id: string | null
 }
 
 export type UserMaxAggregateOutputType = {
@@ -56,6 +57,7 @@ export type UserMaxAggregateOutputType = {
   createdAt: Date | null
   updatedAt: Date | null
   totpKey: string | null
+  telegram_id: string | null
 }
 
 export type UserCountAggregateOutputType = {
@@ -73,6 +75,7 @@ export type UserCountAggregateOutputType = {
   createdAt: number
   updatedAt: number
   totpKey: number
+  telegram_id: number
   _all: number
 }
 
@@ -92,6 +95,7 @@ export type UserMinAggregateInputType = {
   createdAt?: true
   updatedAt?: true
   totpKey?: true
+  telegram_id?: true
 }
 
 export type UserMaxAggregateInputType = {
@@ -109,6 +113,7 @@ export type UserMaxAggregateInputType = {
   createdAt?: true
   updatedAt?: true
   totpKey?: true
+  telegram_id?: true
 }
 
 export type UserCountAggregateInputType = {
@@ -126,6 +131,7 @@ export type UserCountAggregateInputType = {
   createdAt?: true
   updatedAt?: true
   totpKey?: true
+  telegram_id?: true
   _all?: true
 }
 
@@ -216,6 +222,7 @@ export type UserGroupByOutputType = {
   createdAt: Date
   updatedAt: Date
   totpKey: string | null
+  telegram_id: string | null
   _count: UserCountAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
@@ -254,12 +261,15 @@ export type UserWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   totpKey?: Prisma.StringNullableFilter<"User"> | string | null
+  telegram_id?: Prisma.StringNullableFilter<"User"> | string | null
   tokens?: Prisma.TokenListRelationFilter
   socialLinks?: Prisma.SocialLinkListRelationFilter
   stream?: Prisma.XOR<Prisma.StreamNullableScalarRelationFilter, Prisma.StreamWhereInput> | null
   chatMessages?: Prisma.ChatMessageListRelationFilter
   followers?: Prisma.FollowListRelationFilter
   followings?: Prisma.FollowListRelationFilter
+  notification?: Prisma.NotificationListRelationFilter
+  notificationSettings?: Prisma.XOR<Prisma.NotificationSettingsNullableScalarRelationFilter, Prisma.NotificationSettingsWhereInput> | null
 }
 
 export type UserOrderByWithRelationInput = {
@@ -277,12 +287,15 @@ export type UserOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   totpKey?: Prisma.SortOrderInput | Prisma.SortOrder
+  telegram_id?: Prisma.SortOrderInput | Prisma.SortOrder
   tokens?: Prisma.TokenOrderByRelationAggregateInput
   socialLinks?: Prisma.SocialLinkOrderByRelationAggregateInput
   stream?: Prisma.StreamOrderByWithRelationInput
   chatMessages?: Prisma.ChatMessageOrderByRelationAggregateInput
   followers?: Prisma.FollowOrderByRelationAggregateInput
   followings?: Prisma.FollowOrderByRelationAggregateInput
+  notification?: Prisma.NotificationOrderByRelationAggregateInput
+  notificationSettings?: Prisma.NotificationSettingsOrderByWithRelationInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -303,12 +316,15 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   totpKey?: Prisma.StringNullableFilter<"User"> | string | null
+  telegram_id?: Prisma.StringNullableFilter<"User"> | string | null
   tokens?: Prisma.TokenListRelationFilter
   socialLinks?: Prisma.SocialLinkListRelationFilter
   stream?: Prisma.XOR<Prisma.StreamNullableScalarRelationFilter, Prisma.StreamWhereInput> | null
   chatMessages?: Prisma.ChatMessageListRelationFilter
   followers?: Prisma.FollowListRelationFilter
   followings?: Prisma.FollowListRelationFilter
+  notification?: Prisma.NotificationListRelationFilter
+  notificationSettings?: Prisma.XOR<Prisma.NotificationSettingsNullableScalarRelationFilter, Prisma.NotificationSettingsWhereInput> | null
 }, "id" | "email" | "username">
 
 export type UserOrderByWithAggregationInput = {
@@ -326,6 +342,7 @@ export type UserOrderByWithAggregationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   totpKey?: Prisma.SortOrderInput | Prisma.SortOrder
+  telegram_id?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
   _min?: Prisma.UserMinOrderByAggregateInput
@@ -349,6 +366,7 @@ export type UserScalarWhereWithAggregatesInput = {
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   totpKey?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  telegram_id?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
 }
 
 export type UserCreateInput = {
@@ -366,12 +384,15 @@ export type UserCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   totpKey?: string | null
+  telegram_id?: string | null
   tokens?: Prisma.TokenCreateNestedManyWithoutUserInput
   socialLinks?: Prisma.SocialLinkCreateNestedManyWithoutUserInput
   stream?: Prisma.StreamCreateNestedOneWithoutUserInput
   chatMessages?: Prisma.ChatMessageCreateNestedManyWithoutUserInput
   followers?: Prisma.FollowCreateNestedManyWithoutFollowerInput
   followings?: Prisma.FollowCreateNestedManyWithoutFollowingInput
+  notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  notificationSettings?: Prisma.NotificationSettingsCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -389,12 +410,15 @@ export type UserUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   totpKey?: string | null
+  telegram_id?: string | null
   tokens?: Prisma.TokenUncheckedCreateNestedManyWithoutUserInput
   socialLinks?: Prisma.SocialLinkUncheckedCreateNestedManyWithoutUserInput
   stream?: Prisma.StreamUncheckedCreateNestedOneWithoutUserInput
   chatMessages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutUserInput
   followers?: Prisma.FollowUncheckedCreateNestedManyWithoutFollowerInput
   followings?: Prisma.FollowUncheckedCreateNestedManyWithoutFollowingInput
+  notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  notificationSettings?: Prisma.NotificationSettingsUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -412,12 +436,15 @@ export type UserUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   totpKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tokens?: Prisma.TokenUpdateManyWithoutUserNestedInput
   socialLinks?: Prisma.SocialLinkUpdateManyWithoutUserNestedInput
   stream?: Prisma.StreamUpdateOneWithoutUserNestedInput
   chatMessages?: Prisma.ChatMessageUpdateManyWithoutUserNestedInput
   followers?: Prisma.FollowUpdateManyWithoutFollowerNestedInput
   followings?: Prisma.FollowUpdateManyWithoutFollowingNestedInput
+  notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  notificationSettings?: Prisma.NotificationSettingsUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -435,12 +462,15 @@ export type UserUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   totpKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tokens?: Prisma.TokenUncheckedUpdateManyWithoutUserNestedInput
   socialLinks?: Prisma.SocialLinkUncheckedUpdateManyWithoutUserNestedInput
   stream?: Prisma.StreamUncheckedUpdateOneWithoutUserNestedInput
   chatMessages?: Prisma.ChatMessageUncheckedUpdateManyWithoutUserNestedInput
   followers?: Prisma.FollowUncheckedUpdateManyWithoutFollowerNestedInput
   followings?: Prisma.FollowUncheckedUpdateManyWithoutFollowingNestedInput
+  notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  notificationSettings?: Prisma.NotificationSettingsUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -458,6 +488,7 @@ export type UserCreateManyInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   totpKey?: string | null
+  telegram_id?: string | null
 }
 
 export type UserUpdateManyMutationInput = {
@@ -475,6 +506,7 @@ export type UserUpdateManyMutationInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   totpKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type UserUncheckedUpdateManyInput = {
@@ -492,6 +524,7 @@ export type UserUncheckedUpdateManyInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   totpKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type UserCountOrderByAggregateInput = {
@@ -509,6 +542,7 @@ export type UserCountOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   totpKey?: Prisma.SortOrder
+  telegram_id?: Prisma.SortOrder
 }
 
 export type UserMaxOrderByAggregateInput = {
@@ -526,6 +560,7 @@ export type UserMaxOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   totpKey?: Prisma.SortOrder
+  telegram_id?: Prisma.SortOrder
 }
 
 export type UserMinOrderByAggregateInput = {
@@ -543,6 +578,7 @@ export type UserMinOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   totpKey?: Prisma.SortOrder
+  telegram_id?: Prisma.SortOrder
 }
 
 export type UserNullableScalarRelationFilter = {
@@ -665,6 +701,34 @@ export type UserUpdateOneRequiredWithoutFollowingsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutFollowingsInput, Prisma.UserUpdateWithoutFollowingsInput>, Prisma.UserUncheckedUpdateWithoutFollowingsInput>
 }
 
+export type UserCreateNestedOneWithoutNotificationInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutNotificationInput, Prisma.UserUncheckedCreateWithoutNotificationInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutNotificationInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutNotificationNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutNotificationInput, Prisma.UserUncheckedCreateWithoutNotificationInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutNotificationInput
+  upsert?: Prisma.UserUpsertWithoutNotificationInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutNotificationInput, Prisma.UserUpdateWithoutNotificationInput>, Prisma.UserUncheckedUpdateWithoutNotificationInput>
+}
+
+export type UserCreateNestedOneWithoutNotificationSettingsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutNotificationSettingsInput, Prisma.UserUncheckedCreateWithoutNotificationSettingsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutNotificationSettingsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutNotificationSettingsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutNotificationSettingsInput, Prisma.UserUncheckedCreateWithoutNotificationSettingsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutNotificationSettingsInput
+  upsert?: Prisma.UserUpsertWithoutNotificationSettingsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutNotificationSettingsInput, Prisma.UserUpdateWithoutNotificationSettingsInput>, Prisma.UserUncheckedUpdateWithoutNotificationSettingsInput>
+}
+
 export type UserCreateWithoutTokensInput = {
   id?: string
   email: string
@@ -680,11 +744,14 @@ export type UserCreateWithoutTokensInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   totpKey?: string | null
+  telegram_id?: string | null
   socialLinks?: Prisma.SocialLinkCreateNestedManyWithoutUserInput
   stream?: Prisma.StreamCreateNestedOneWithoutUserInput
   chatMessages?: Prisma.ChatMessageCreateNestedManyWithoutUserInput
   followers?: Prisma.FollowCreateNestedManyWithoutFollowerInput
   followings?: Prisma.FollowCreateNestedManyWithoutFollowingInput
+  notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  notificationSettings?: Prisma.NotificationSettingsCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutTokensInput = {
@@ -702,11 +769,14 @@ export type UserUncheckedCreateWithoutTokensInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   totpKey?: string | null
+  telegram_id?: string | null
   socialLinks?: Prisma.SocialLinkUncheckedCreateNestedManyWithoutUserInput
   stream?: Prisma.StreamUncheckedCreateNestedOneWithoutUserInput
   chatMessages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutUserInput
   followers?: Prisma.FollowUncheckedCreateNestedManyWithoutFollowerInput
   followings?: Prisma.FollowUncheckedCreateNestedManyWithoutFollowingInput
+  notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  notificationSettings?: Prisma.NotificationSettingsUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutTokensInput = {
@@ -740,11 +810,14 @@ export type UserUpdateWithoutTokensInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   totpKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   socialLinks?: Prisma.SocialLinkUpdateManyWithoutUserNestedInput
   stream?: Prisma.StreamUpdateOneWithoutUserNestedInput
   chatMessages?: Prisma.ChatMessageUpdateManyWithoutUserNestedInput
   followers?: Prisma.FollowUpdateManyWithoutFollowerNestedInput
   followings?: Prisma.FollowUpdateManyWithoutFollowingNestedInput
+  notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  notificationSettings?: Prisma.NotificationSettingsUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutTokensInput = {
@@ -762,11 +835,14 @@ export type UserUncheckedUpdateWithoutTokensInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   totpKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   socialLinks?: Prisma.SocialLinkUncheckedUpdateManyWithoutUserNestedInput
   stream?: Prisma.StreamUncheckedUpdateOneWithoutUserNestedInput
   chatMessages?: Prisma.ChatMessageUncheckedUpdateManyWithoutUserNestedInput
   followers?: Prisma.FollowUncheckedUpdateManyWithoutFollowerNestedInput
   followings?: Prisma.FollowUncheckedUpdateManyWithoutFollowingNestedInput
+  notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  notificationSettings?: Prisma.NotificationSettingsUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSocialLinksInput = {
@@ -784,11 +860,14 @@ export type UserCreateWithoutSocialLinksInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   totpKey?: string | null
+  telegram_id?: string | null
   tokens?: Prisma.TokenCreateNestedManyWithoutUserInput
   stream?: Prisma.StreamCreateNestedOneWithoutUserInput
   chatMessages?: Prisma.ChatMessageCreateNestedManyWithoutUserInput
   followers?: Prisma.FollowCreateNestedManyWithoutFollowerInput
   followings?: Prisma.FollowCreateNestedManyWithoutFollowingInput
+  notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  notificationSettings?: Prisma.NotificationSettingsCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSocialLinksInput = {
@@ -806,11 +885,14 @@ export type UserUncheckedCreateWithoutSocialLinksInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   totpKey?: string | null
+  telegram_id?: string | null
   tokens?: Prisma.TokenUncheckedCreateNestedManyWithoutUserInput
   stream?: Prisma.StreamUncheckedCreateNestedOneWithoutUserInput
   chatMessages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutUserInput
   followers?: Prisma.FollowUncheckedCreateNestedManyWithoutFollowerInput
   followings?: Prisma.FollowUncheckedCreateNestedManyWithoutFollowingInput
+  notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  notificationSettings?: Prisma.NotificationSettingsUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSocialLinksInput = {
@@ -844,11 +926,14 @@ export type UserUpdateWithoutSocialLinksInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   totpKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tokens?: Prisma.TokenUpdateManyWithoutUserNestedInput
   stream?: Prisma.StreamUpdateOneWithoutUserNestedInput
   chatMessages?: Prisma.ChatMessageUpdateManyWithoutUserNestedInput
   followers?: Prisma.FollowUpdateManyWithoutFollowerNestedInput
   followings?: Prisma.FollowUpdateManyWithoutFollowingNestedInput
+  notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  notificationSettings?: Prisma.NotificationSettingsUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSocialLinksInput = {
@@ -866,11 +951,14 @@ export type UserUncheckedUpdateWithoutSocialLinksInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   totpKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tokens?: Prisma.TokenUncheckedUpdateManyWithoutUserNestedInput
   stream?: Prisma.StreamUncheckedUpdateOneWithoutUserNestedInput
   chatMessages?: Prisma.ChatMessageUncheckedUpdateManyWithoutUserNestedInput
   followers?: Prisma.FollowUncheckedUpdateManyWithoutFollowerNestedInput
   followings?: Prisma.FollowUncheckedUpdateManyWithoutFollowingNestedInput
+  notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  notificationSettings?: Prisma.NotificationSettingsUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateWithoutStreamInput = {
@@ -888,11 +976,14 @@ export type UserCreateWithoutStreamInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   totpKey?: string | null
+  telegram_id?: string | null
   tokens?: Prisma.TokenCreateNestedManyWithoutUserInput
   socialLinks?: Prisma.SocialLinkCreateNestedManyWithoutUserInput
   chatMessages?: Prisma.ChatMessageCreateNestedManyWithoutUserInput
   followers?: Prisma.FollowCreateNestedManyWithoutFollowerInput
   followings?: Prisma.FollowCreateNestedManyWithoutFollowingInput
+  notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  notificationSettings?: Prisma.NotificationSettingsCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutStreamInput = {
@@ -910,11 +1001,14 @@ export type UserUncheckedCreateWithoutStreamInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   totpKey?: string | null
+  telegram_id?: string | null
   tokens?: Prisma.TokenUncheckedCreateNestedManyWithoutUserInput
   socialLinks?: Prisma.SocialLinkUncheckedCreateNestedManyWithoutUserInput
   chatMessages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutUserInput
   followers?: Prisma.FollowUncheckedCreateNestedManyWithoutFollowerInput
   followings?: Prisma.FollowUncheckedCreateNestedManyWithoutFollowingInput
+  notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  notificationSettings?: Prisma.NotificationSettingsUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutStreamInput = {
@@ -948,11 +1042,14 @@ export type UserUpdateWithoutStreamInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   totpKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tokens?: Prisma.TokenUpdateManyWithoutUserNestedInput
   socialLinks?: Prisma.SocialLinkUpdateManyWithoutUserNestedInput
   chatMessages?: Prisma.ChatMessageUpdateManyWithoutUserNestedInput
   followers?: Prisma.FollowUpdateManyWithoutFollowerNestedInput
   followings?: Prisma.FollowUpdateManyWithoutFollowingNestedInput
+  notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  notificationSettings?: Prisma.NotificationSettingsUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutStreamInput = {
@@ -970,11 +1067,14 @@ export type UserUncheckedUpdateWithoutStreamInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   totpKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tokens?: Prisma.TokenUncheckedUpdateManyWithoutUserNestedInput
   socialLinks?: Prisma.SocialLinkUncheckedUpdateManyWithoutUserNestedInput
   chatMessages?: Prisma.ChatMessageUncheckedUpdateManyWithoutUserNestedInput
   followers?: Prisma.FollowUncheckedUpdateManyWithoutFollowerNestedInput
   followings?: Prisma.FollowUncheckedUpdateManyWithoutFollowingNestedInput
+  notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  notificationSettings?: Prisma.NotificationSettingsUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateWithoutChatMessagesInput = {
@@ -992,11 +1092,14 @@ export type UserCreateWithoutChatMessagesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   totpKey?: string | null
+  telegram_id?: string | null
   tokens?: Prisma.TokenCreateNestedManyWithoutUserInput
   socialLinks?: Prisma.SocialLinkCreateNestedManyWithoutUserInput
   stream?: Prisma.StreamCreateNestedOneWithoutUserInput
   followers?: Prisma.FollowCreateNestedManyWithoutFollowerInput
   followings?: Prisma.FollowCreateNestedManyWithoutFollowingInput
+  notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  notificationSettings?: Prisma.NotificationSettingsCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutChatMessagesInput = {
@@ -1014,11 +1117,14 @@ export type UserUncheckedCreateWithoutChatMessagesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   totpKey?: string | null
+  telegram_id?: string | null
   tokens?: Prisma.TokenUncheckedCreateNestedManyWithoutUserInput
   socialLinks?: Prisma.SocialLinkUncheckedCreateNestedManyWithoutUserInput
   stream?: Prisma.StreamUncheckedCreateNestedOneWithoutUserInput
   followers?: Prisma.FollowUncheckedCreateNestedManyWithoutFollowerInput
   followings?: Prisma.FollowUncheckedCreateNestedManyWithoutFollowingInput
+  notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  notificationSettings?: Prisma.NotificationSettingsUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutChatMessagesInput = {
@@ -1052,11 +1158,14 @@ export type UserUpdateWithoutChatMessagesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   totpKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tokens?: Prisma.TokenUpdateManyWithoutUserNestedInput
   socialLinks?: Prisma.SocialLinkUpdateManyWithoutUserNestedInput
   stream?: Prisma.StreamUpdateOneWithoutUserNestedInput
   followers?: Prisma.FollowUpdateManyWithoutFollowerNestedInput
   followings?: Prisma.FollowUpdateManyWithoutFollowingNestedInput
+  notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  notificationSettings?: Prisma.NotificationSettingsUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutChatMessagesInput = {
@@ -1074,11 +1183,14 @@ export type UserUncheckedUpdateWithoutChatMessagesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   totpKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tokens?: Prisma.TokenUncheckedUpdateManyWithoutUserNestedInput
   socialLinks?: Prisma.SocialLinkUncheckedUpdateManyWithoutUserNestedInput
   stream?: Prisma.StreamUncheckedUpdateOneWithoutUserNestedInput
   followers?: Prisma.FollowUncheckedUpdateManyWithoutFollowerNestedInput
   followings?: Prisma.FollowUncheckedUpdateManyWithoutFollowingNestedInput
+  notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  notificationSettings?: Prisma.NotificationSettingsUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateWithoutFollowersInput = {
@@ -1096,11 +1208,14 @@ export type UserCreateWithoutFollowersInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   totpKey?: string | null
+  telegram_id?: string | null
   tokens?: Prisma.TokenCreateNestedManyWithoutUserInput
   socialLinks?: Prisma.SocialLinkCreateNestedManyWithoutUserInput
   stream?: Prisma.StreamCreateNestedOneWithoutUserInput
   chatMessages?: Prisma.ChatMessageCreateNestedManyWithoutUserInput
   followings?: Prisma.FollowCreateNestedManyWithoutFollowingInput
+  notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  notificationSettings?: Prisma.NotificationSettingsCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutFollowersInput = {
@@ -1118,11 +1233,14 @@ export type UserUncheckedCreateWithoutFollowersInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   totpKey?: string | null
+  telegram_id?: string | null
   tokens?: Prisma.TokenUncheckedCreateNestedManyWithoutUserInput
   socialLinks?: Prisma.SocialLinkUncheckedCreateNestedManyWithoutUserInput
   stream?: Prisma.StreamUncheckedCreateNestedOneWithoutUserInput
   chatMessages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutUserInput
   followings?: Prisma.FollowUncheckedCreateNestedManyWithoutFollowingInput
+  notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  notificationSettings?: Prisma.NotificationSettingsUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutFollowersInput = {
@@ -1145,11 +1263,14 @@ export type UserCreateWithoutFollowingsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   totpKey?: string | null
+  telegram_id?: string | null
   tokens?: Prisma.TokenCreateNestedManyWithoutUserInput
   socialLinks?: Prisma.SocialLinkCreateNestedManyWithoutUserInput
   stream?: Prisma.StreamCreateNestedOneWithoutUserInput
   chatMessages?: Prisma.ChatMessageCreateNestedManyWithoutUserInput
   followers?: Prisma.FollowCreateNestedManyWithoutFollowerInput
+  notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  notificationSettings?: Prisma.NotificationSettingsCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutFollowingsInput = {
@@ -1167,11 +1288,14 @@ export type UserUncheckedCreateWithoutFollowingsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   totpKey?: string | null
+  telegram_id?: string | null
   tokens?: Prisma.TokenUncheckedCreateNestedManyWithoutUserInput
   socialLinks?: Prisma.SocialLinkUncheckedCreateNestedManyWithoutUserInput
   stream?: Prisma.StreamUncheckedCreateNestedOneWithoutUserInput
   chatMessages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutUserInput
   followers?: Prisma.FollowUncheckedCreateNestedManyWithoutFollowerInput
+  notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  notificationSettings?: Prisma.NotificationSettingsUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutFollowingsInput = {
@@ -1205,11 +1329,14 @@ export type UserUpdateWithoutFollowersInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   totpKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tokens?: Prisma.TokenUpdateManyWithoutUserNestedInput
   socialLinks?: Prisma.SocialLinkUpdateManyWithoutUserNestedInput
   stream?: Prisma.StreamUpdateOneWithoutUserNestedInput
   chatMessages?: Prisma.ChatMessageUpdateManyWithoutUserNestedInput
   followings?: Prisma.FollowUpdateManyWithoutFollowingNestedInput
+  notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  notificationSettings?: Prisma.NotificationSettingsUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutFollowersInput = {
@@ -1227,11 +1354,14 @@ export type UserUncheckedUpdateWithoutFollowersInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   totpKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tokens?: Prisma.TokenUncheckedUpdateManyWithoutUserNestedInput
   socialLinks?: Prisma.SocialLinkUncheckedUpdateManyWithoutUserNestedInput
   stream?: Prisma.StreamUncheckedUpdateOneWithoutUserNestedInput
   chatMessages?: Prisma.ChatMessageUncheckedUpdateManyWithoutUserNestedInput
   followings?: Prisma.FollowUncheckedUpdateManyWithoutFollowingNestedInput
+  notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  notificationSettings?: Prisma.NotificationSettingsUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutFollowingsInput = {
@@ -1260,11 +1390,14 @@ export type UserUpdateWithoutFollowingsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   totpKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tokens?: Prisma.TokenUpdateManyWithoutUserNestedInput
   socialLinks?: Prisma.SocialLinkUpdateManyWithoutUserNestedInput
   stream?: Prisma.StreamUpdateOneWithoutUserNestedInput
   chatMessages?: Prisma.ChatMessageUpdateManyWithoutUserNestedInput
   followers?: Prisma.FollowUpdateManyWithoutFollowerNestedInput
+  notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  notificationSettings?: Prisma.NotificationSettingsUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutFollowingsInput = {
@@ -1282,11 +1415,246 @@ export type UserUncheckedUpdateWithoutFollowingsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   totpKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tokens?: Prisma.TokenUncheckedUpdateManyWithoutUserNestedInput
   socialLinks?: Prisma.SocialLinkUncheckedUpdateManyWithoutUserNestedInput
   stream?: Prisma.StreamUncheckedUpdateOneWithoutUserNestedInput
   chatMessages?: Prisma.ChatMessageUncheckedUpdateManyWithoutUserNestedInput
   followers?: Prisma.FollowUncheckedUpdateManyWithoutFollowerNestedInput
+  notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  notificationSettings?: Prisma.NotificationSettingsUncheckedUpdateOneWithoutUserNestedInput
+}
+
+export type UserCreateWithoutNotificationInput = {
+  id?: string
+  email: string
+  password: string
+  username: string
+  name: string
+  avatar?: string | null
+  bio?: string | null
+  isVerified?: boolean
+  isActive?: boolean
+  isDeactivated?: boolean
+  deactivatedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  totpKey?: string | null
+  telegram_id?: string | null
+  tokens?: Prisma.TokenCreateNestedManyWithoutUserInput
+  socialLinks?: Prisma.SocialLinkCreateNestedManyWithoutUserInput
+  stream?: Prisma.StreamCreateNestedOneWithoutUserInput
+  chatMessages?: Prisma.ChatMessageCreateNestedManyWithoutUserInput
+  followers?: Prisma.FollowCreateNestedManyWithoutFollowerInput
+  followings?: Prisma.FollowCreateNestedManyWithoutFollowingInput
+  notificationSettings?: Prisma.NotificationSettingsCreateNestedOneWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutNotificationInput = {
+  id?: string
+  email: string
+  password: string
+  username: string
+  name: string
+  avatar?: string | null
+  bio?: string | null
+  isVerified?: boolean
+  isActive?: boolean
+  isDeactivated?: boolean
+  deactivatedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  totpKey?: string | null
+  telegram_id?: string | null
+  tokens?: Prisma.TokenUncheckedCreateNestedManyWithoutUserInput
+  socialLinks?: Prisma.SocialLinkUncheckedCreateNestedManyWithoutUserInput
+  stream?: Prisma.StreamUncheckedCreateNestedOneWithoutUserInput
+  chatMessages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutUserInput
+  followers?: Prisma.FollowUncheckedCreateNestedManyWithoutFollowerInput
+  followings?: Prisma.FollowUncheckedCreateNestedManyWithoutFollowingInput
+  notificationSettings?: Prisma.NotificationSettingsUncheckedCreateNestedOneWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutNotificationInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutNotificationInput, Prisma.UserUncheckedCreateWithoutNotificationInput>
+}
+
+export type UserUpsertWithoutNotificationInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutNotificationInput, Prisma.UserUncheckedUpdateWithoutNotificationInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutNotificationInput, Prisma.UserUncheckedCreateWithoutNotificationInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutNotificationInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutNotificationInput, Prisma.UserUncheckedUpdateWithoutNotificationInput>
+}
+
+export type UserUpdateWithoutNotificationInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isDeactivated?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  totpKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tokens?: Prisma.TokenUpdateManyWithoutUserNestedInput
+  socialLinks?: Prisma.SocialLinkUpdateManyWithoutUserNestedInput
+  stream?: Prisma.StreamUpdateOneWithoutUserNestedInput
+  chatMessages?: Prisma.ChatMessageUpdateManyWithoutUserNestedInput
+  followers?: Prisma.FollowUpdateManyWithoutFollowerNestedInput
+  followings?: Prisma.FollowUpdateManyWithoutFollowingNestedInput
+  notificationSettings?: Prisma.NotificationSettingsUpdateOneWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutNotificationInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isDeactivated?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  totpKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tokens?: Prisma.TokenUncheckedUpdateManyWithoutUserNestedInput
+  socialLinks?: Prisma.SocialLinkUncheckedUpdateManyWithoutUserNestedInput
+  stream?: Prisma.StreamUncheckedUpdateOneWithoutUserNestedInput
+  chatMessages?: Prisma.ChatMessageUncheckedUpdateManyWithoutUserNestedInput
+  followers?: Prisma.FollowUncheckedUpdateManyWithoutFollowerNestedInput
+  followings?: Prisma.FollowUncheckedUpdateManyWithoutFollowingNestedInput
+  notificationSettings?: Prisma.NotificationSettingsUncheckedUpdateOneWithoutUserNestedInput
+}
+
+export type UserCreateWithoutNotificationSettingsInput = {
+  id?: string
+  email: string
+  password: string
+  username: string
+  name: string
+  avatar?: string | null
+  bio?: string | null
+  isVerified?: boolean
+  isActive?: boolean
+  isDeactivated?: boolean
+  deactivatedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  totpKey?: string | null
+  telegram_id?: string | null
+  tokens?: Prisma.TokenCreateNestedManyWithoutUserInput
+  socialLinks?: Prisma.SocialLinkCreateNestedManyWithoutUserInput
+  stream?: Prisma.StreamCreateNestedOneWithoutUserInput
+  chatMessages?: Prisma.ChatMessageCreateNestedManyWithoutUserInput
+  followers?: Prisma.FollowCreateNestedManyWithoutFollowerInput
+  followings?: Prisma.FollowCreateNestedManyWithoutFollowingInput
+  notification?: Prisma.NotificationCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutNotificationSettingsInput = {
+  id?: string
+  email: string
+  password: string
+  username: string
+  name: string
+  avatar?: string | null
+  bio?: string | null
+  isVerified?: boolean
+  isActive?: boolean
+  isDeactivated?: boolean
+  deactivatedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  totpKey?: string | null
+  telegram_id?: string | null
+  tokens?: Prisma.TokenUncheckedCreateNestedManyWithoutUserInput
+  socialLinks?: Prisma.SocialLinkUncheckedCreateNestedManyWithoutUserInput
+  stream?: Prisma.StreamUncheckedCreateNestedOneWithoutUserInput
+  chatMessages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutUserInput
+  followers?: Prisma.FollowUncheckedCreateNestedManyWithoutFollowerInput
+  followings?: Prisma.FollowUncheckedCreateNestedManyWithoutFollowingInput
+  notification?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutNotificationSettingsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutNotificationSettingsInput, Prisma.UserUncheckedCreateWithoutNotificationSettingsInput>
+}
+
+export type UserUpsertWithoutNotificationSettingsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutNotificationSettingsInput, Prisma.UserUncheckedUpdateWithoutNotificationSettingsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutNotificationSettingsInput, Prisma.UserUncheckedCreateWithoutNotificationSettingsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutNotificationSettingsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutNotificationSettingsInput, Prisma.UserUncheckedUpdateWithoutNotificationSettingsInput>
+}
+
+export type UserUpdateWithoutNotificationSettingsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isDeactivated?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  totpKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tokens?: Prisma.TokenUpdateManyWithoutUserNestedInput
+  socialLinks?: Prisma.SocialLinkUpdateManyWithoutUserNestedInput
+  stream?: Prisma.StreamUpdateOneWithoutUserNestedInput
+  chatMessages?: Prisma.ChatMessageUpdateManyWithoutUserNestedInput
+  followers?: Prisma.FollowUpdateManyWithoutFollowerNestedInput
+  followings?: Prisma.FollowUpdateManyWithoutFollowingNestedInput
+  notification?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutNotificationSettingsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isDeactivated?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  totpKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telegram_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tokens?: Prisma.TokenUncheckedUpdateManyWithoutUserNestedInput
+  socialLinks?: Prisma.SocialLinkUncheckedUpdateManyWithoutUserNestedInput
+  stream?: Prisma.StreamUncheckedUpdateOneWithoutUserNestedInput
+  chatMessages?: Prisma.ChatMessageUncheckedUpdateManyWithoutUserNestedInput
+  followers?: Prisma.FollowUncheckedUpdateManyWithoutFollowerNestedInput
+  followings?: Prisma.FollowUncheckedUpdateManyWithoutFollowingNestedInput
+  notification?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -1300,6 +1668,7 @@ export type UserCountOutputType = {
   chatMessages: number
   followers: number
   followings: number
+  notification: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1308,6 +1677,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   chatMessages?: boolean | UserCountOutputTypeCountChatMessagesArgs
   followers?: boolean | UserCountOutputTypeCountFollowersArgs
   followings?: boolean | UserCountOutputTypeCountFollowingsArgs
+  notification?: boolean | UserCountOutputTypeCountNotificationArgs
 }
 
 /**
@@ -1355,6 +1725,13 @@ export type UserCountOutputTypeCountFollowingsArgs<ExtArgs extends runtime.Types
   where?: Prisma.FollowWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountNotificationArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.NotificationWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1371,12 +1748,15 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   createdAt?: boolean
   updatedAt?: boolean
   totpKey?: boolean
+  telegram_id?: boolean
   tokens?: boolean | Prisma.User$tokensArgs<ExtArgs>
   socialLinks?: boolean | Prisma.User$socialLinksArgs<ExtArgs>
   stream?: boolean | Prisma.User$streamArgs<ExtArgs>
   chatMessages?: boolean | Prisma.User$chatMessagesArgs<ExtArgs>
   followers?: boolean | Prisma.User$followersArgs<ExtArgs>
   followings?: boolean | Prisma.User$followingsArgs<ExtArgs>
+  notification?: boolean | Prisma.User$notificationArgs<ExtArgs>
+  notificationSettings?: boolean | Prisma.User$notificationSettingsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1395,6 +1775,7 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   createdAt?: boolean
   updatedAt?: boolean
   totpKey?: boolean
+  telegram_id?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1412,6 +1793,7 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   createdAt?: boolean
   updatedAt?: boolean
   totpKey?: boolean
+  telegram_id?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectScalar = {
@@ -1429,9 +1811,10 @@ export type UserSelectScalar = {
   createdAt?: boolean
   updatedAt?: boolean
   totpKey?: boolean
+  telegram_id?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "password" | "username" | "name" | "avatar" | "bio" | "isVerified" | "isActive" | "isDeactivated" | "deactivatedAt" | "createdAt" | "updatedAt" | "totpKey", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "password" | "username" | "name" | "avatar" | "bio" | "isVerified" | "isActive" | "isDeactivated" | "deactivatedAt" | "createdAt" | "updatedAt" | "totpKey" | "telegram_id", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tokens?: boolean | Prisma.User$tokensArgs<ExtArgs>
   socialLinks?: boolean | Prisma.User$socialLinksArgs<ExtArgs>
@@ -1439,6 +1822,8 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   chatMessages?: boolean | Prisma.User$chatMessagesArgs<ExtArgs>
   followers?: boolean | Prisma.User$followersArgs<ExtArgs>
   followings?: boolean | Prisma.User$followingsArgs<ExtArgs>
+  notification?: boolean | Prisma.User$notificationArgs<ExtArgs>
+  notificationSettings?: boolean | Prisma.User$notificationSettingsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1453,6 +1838,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     chatMessages: Prisma.$ChatMessagePayload<ExtArgs>[]
     followers: Prisma.$FollowPayload<ExtArgs>[]
     followings: Prisma.$FollowPayload<ExtArgs>[]
+    notification: Prisma.$NotificationPayload<ExtArgs>[]
+    notificationSettings: Prisma.$NotificationSettingsPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1469,6 +1856,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     createdAt: Date
     updatedAt: Date
     totpKey: string | null
+    telegram_id: string | null
   }, ExtArgs["result"]["user"]>
   composites: {}
 }
@@ -1869,6 +2257,8 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   chatMessages<T extends Prisma.User$chatMessagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$chatMessagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChatMessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   followers<T extends Prisma.User$followersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$followersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FollowPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   followings<T extends Prisma.User$followingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$followingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FollowPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  notification<T extends Prisma.User$notificationArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$notificationArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  notificationSettings<T extends Prisma.User$notificationSettingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$notificationSettingsArgs<ExtArgs>>): Prisma.Prisma__NotificationSettingsClient<runtime.Types.Result.GetResult<Prisma.$NotificationSettingsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1912,6 +2302,7 @@ export interface UserFieldRefs {
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly totpKey: Prisma.FieldRef<"User", 'String'>
+  readonly telegram_id: Prisma.FieldRef<"User", 'String'>
 }
     
 
@@ -2441,6 +2832,49 @@ export type User$followingsArgs<ExtArgs extends runtime.Types.Extensions.Interna
   take?: number
   skip?: number
   distinct?: Prisma.FollowScalarFieldEnum | Prisma.FollowScalarFieldEnum[]
+}
+
+/**
+ * User.notification
+ */
+export type User$notificationArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Notification
+   */
+  select?: Prisma.NotificationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Notification
+   */
+  omit?: Prisma.NotificationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.NotificationInclude<ExtArgs> | null
+  where?: Prisma.NotificationWhereInput
+  orderBy?: Prisma.NotificationOrderByWithRelationInput | Prisma.NotificationOrderByWithRelationInput[]
+  cursor?: Prisma.NotificationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.NotificationScalarFieldEnum | Prisma.NotificationScalarFieldEnum[]
+}
+
+/**
+ * User.notificationSettings
+ */
+export type User$notificationSettingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the NotificationSettings
+   */
+  select?: Prisma.NotificationSettingsSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the NotificationSettings
+   */
+  omit?: Prisma.NotificationSettingsOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.NotificationSettingsInclude<ExtArgs> | null
+  where?: Prisma.NotificationSettingsWhereInput
 }
 
 /**

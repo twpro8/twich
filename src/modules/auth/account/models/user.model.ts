@@ -38,6 +38,9 @@ export class UserModel {
   @Field(() => Date)
   updatedAt: Date;
 
+  @Field()
+  telegramId: string;
+
   // Relationships
   @Field(() => [SocialLinkModel], { nullable: true })
   socialLinks: SocialLinkModel[] | null;

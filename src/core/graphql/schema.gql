@@ -265,6 +265,7 @@ type UserModel {
   name: String!
   socialLinks: [SocialLinkModel!]
   stream: StreamModel
+  telegramId: String!
   updatedAt: DateTime!
   username: String!
 }

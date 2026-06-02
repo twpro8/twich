@@ -57,7 +57,9 @@ export const ModelName = {
   Stream: 'Stream',
   Category: 'Category',
   ChatMessage: 'ChatMessage',
-  Follow: 'Follow'
+  Follow: 'Follow',
+  Notification: 'Notification',
+  NotificationSettings: 'NotificationSettings'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -90,7 +92,8 @@ export const UserScalarFieldEnum = {
   deactivatedAt: 'deactivatedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  totpKey: 'totpKey'
+  totpKey: 'totpKey',
+  telegram_id: 'telegram_id'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -176,6 +179,31 @@ export const FollowScalarFieldEnum = {
 } as const
 
 export type FollowScalarFieldEnum = (typeof FollowScalarFieldEnum)[keyof typeof FollowScalarFieldEnum]
+
+
+export const NotificationScalarFieldEnum = {
+  id: 'id',
+  message: 'message',
+  type: 'type',
+  isRead: 'isRead',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  userId: 'userId'
+} as const
+
+export type NotificationScalarFieldEnum = (typeof NotificationScalarFieldEnum)[keyof typeof NotificationScalarFieldEnum]
+
+
+export const NotificationSettingsScalarFieldEnum = {
+  id: 'id',
+  site: 'site',
+  telegram: 'telegram',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  userId: 'userId'
+} as const
+
+export type NotificationSettingsScalarFieldEnum = (typeof NotificationSettingsScalarFieldEnum)[keyof typeof NotificationSettingsScalarFieldEnum]
 
 
 export const SortOrder = {

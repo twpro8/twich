@@ -16,3 +16,14 @@ export const TokenType = {
 } as const
 
 export type TokenType = (typeof TokenType)[keyof typeof TokenType]
+
+
+export const NotificationType = {
+  STREAM_START: 'STREAM_START',
+  NEW_FOLLOWER: 'NEW_FOLLOWER',
+  NEW_SPONSORSHIP: 'NEW_SPONSORSHIP',
+  ENABLE_TWO_FACTOR: 'ENABLE_TWO_FACTOR',
+  CHANNEL_VERIFIED: 'CHANNEL_VERIFIED'
+} as const
+
+export type NotificationType = (typeof NotificationType)[keyof typeof NotificationType]
