@@ -302,6 +302,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   id?: string
   email?: string
   username?: string
+  telegram_id?: string
   AND?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   OR?: Prisma.UserWhereInput[]
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
@@ -316,7 +317,6 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   totpKey?: Prisma.StringNullableFilter<"User"> | string | null
-  telegram_id?: Prisma.StringNullableFilter<"User"> | string | null
   tokens?: Prisma.TokenListRelationFilter
   socialLinks?: Prisma.SocialLinkListRelationFilter
   stream?: Prisma.XOR<Prisma.StreamNullableScalarRelationFilter, Prisma.StreamWhereInput> | null
@@ -325,7 +325,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   followings?: Prisma.FollowListRelationFilter
   notification?: Prisma.NotificationListRelationFilter
   notificationSettings?: Prisma.XOR<Prisma.NotificationSettingsNullableScalarRelationFilter, Prisma.NotificationSettingsWhereInput> | null
-}, "id" | "email" | "username">
+}, "id" | "email" | "username" | "telegram_id">
 
 export type UserOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -581,14 +581,14 @@ export type UserMinOrderByAggregateInput = {
   telegram_id?: Prisma.SortOrder
 }
 
-export type UserNullableScalarRelationFilter = {
-  is?: Prisma.UserWhereInput | null
-  isNot?: Prisma.UserWhereInput | null
-}
-
 export type UserScalarRelationFilter = {
   is?: Prisma.UserWhereInput
   isNot?: Prisma.UserWhereInput
+}
+
+export type UserNullableScalarRelationFilter = {
+  is?: Prisma.UserWhereInput | null
+  isNot?: Prisma.UserWhereInput | null
 }
 
 export type StringFieldUpdateOperationsInput = {
@@ -617,12 +617,10 @@ export type UserCreateNestedOneWithoutTokensInput = {
   connect?: Prisma.UserWhereUniqueInput
 }
 
-export type UserUpdateOneWithoutTokensNestedInput = {
+export type UserUpdateOneRequiredWithoutTokensNestedInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutTokensInput, Prisma.UserUncheckedCreateWithoutTokensInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutTokensInput
   upsert?: Prisma.UserUpsertWithoutTokensInput
-  disconnect?: Prisma.UserWhereInput | boolean
-  delete?: Prisma.UserWhereInput | boolean
   connect?: Prisma.UserWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutTokensInput, Prisma.UserUpdateWithoutTokensInput>, Prisma.UserUncheckedUpdateWithoutTokensInput>
 }

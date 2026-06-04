@@ -29,7 +29,7 @@ model User {
   chatMessages         ChatMessage[]
   followers            Follow[]              @relation(name: "followers")
   followings           Follow[]              @relation(name: "followings")
-  telegram_id          String?               @map("telegram_id")
+  telegram_id          String?               @unique @map("telegram_id")
   notification         Notification[]
   notificationSettings NotificationSettings?
 
@@ -38,13 +38,13 @@ model User {
 
 model Token {
   id        String    @id @default(uuid()) @db.Uuid
-  userId    String?   @map("user_id") @db.Uuid
+  userId    String    @map("user_id") @db.Uuid
   token     String    @unique
   type      TokenType
   expiresAt DateTime  @map("expires_at")
   createdAt DateTime  @default(now()) @map("created_at")
   updatedAt DateTime  @updatedAt @map("updated_at")
-  user      User?     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("tokens")
 }

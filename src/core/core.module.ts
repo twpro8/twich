@@ -26,6 +26,7 @@ import { ChatModule } from '@/src/modules/chat/chat.module';
 import { FollowModule } from '@/src/modules/follow/follow.module';
 import { ChannelModule } from '@/src/modules/channel/channel.module';
 import { NotificationModule } from '@/src/modules/notification/notification.module';
+import { TelegramModule } from '@/src/modules/libs/telegram/telegram.module';
 
 @Module({
   imports: [
@@ -51,6 +52,7 @@ import { NotificationModule } from '@/src/modules/notification/notification.modu
     StorageModule,
     CronModule,
     LivekitModule,
+    TelegramModule,
     AccountModule,
     ProfileModule,
     SessionModule,
