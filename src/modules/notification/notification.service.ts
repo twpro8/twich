@@ -28,6 +28,16 @@ export class NotificationService {
     });
   }
 
+  async sendStreamStartedNotification(channel: User, userId: string) {
+    return this.prismaService.notification.create({
+      data: {
+        userId,
+        type: NotificationType.STREAM_START,
+        message: `Join ${channel.username} stream by ${channel.name}`,
+      },
+    });
+  }
+
   async sendNewFollowerNotification(follower: User, userId: string) {
     return this.prismaService.notification.create({
       data: {
