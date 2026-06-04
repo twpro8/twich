@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '@/src/core/prisma/prisma.service';
-import { TokenType, User } from '@prisma/generated/client';
+import { NotificationType, TokenType, User } from '@prisma/generated/client';
 import { ChangeNotificationSettingsInput } from '@/src/modules/notification/inputs/change-notification-settings.input';
 import { generateVerificationToken } from '@/src/shared/utils/generate-token.util';
 
@@ -24,6 +24,16 @@ export class NotificationService {
       where: { userId: user.id },
       orderBy: {
         createdAt: 'desc',
+      },
+    });
+  }
+
+  async sendNewFollowerNotification(follower: User, userId: string) {
+    return this.prismaService.notification.create({
+      data: {
+        userId,
+        type: NotificationType.NEW_FOLLOWER,
+        message: `New follower ${follower.username}`,
       },
     });
   }

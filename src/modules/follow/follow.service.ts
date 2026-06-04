@@ -5,10 +5,14 @@ import {
 } from '@nestjs/common';
 import { PrismaService } from '@/src/core/prisma/prisma.service';
 import { User } from '@prisma/generated/client';
+import { NotificationService } from '@/src/modules/notification/notification.service';
 
 @Injectable()
 export class FollowService {
-  constructor(private readonly prismaService: PrismaService) {}
+  constructor(
+    private readonly prismaService: PrismaService,
+    private readonly notificationService: NotificationService,
+  ) {}
 
   async findMyFollowers(user: User) {
     return this.prismaService.follow.findMany({
@@ -47,6 +51,9 @@ export class FollowService {
       where: {
         id: channelId,
       },
+      include: {
+        notificationSettings: true,
+      },
     });
 
     if (!channel) {
@@ -72,6 +79,13 @@ export class FollowService {
         followingId: channelId,
       },
     });
+
+    if (channel.notificationSettings?.site) {
+      await this.notificationService.sendNewFollowerNotification(
+        user,
+        channelId,
+      );
+    }
 
     return true;
   }
