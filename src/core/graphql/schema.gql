@@ -34,6 +34,16 @@ input ChangeEmailInput {
   email: String!
 }
 
+input ChangeNotificationSettingsInput {
+  site: Boolean!
+  telegram: Boolean!
+}
+
+type ChangeNotificationSettingsResponse {
+  settings: NotificationSettingsModel!
+  telegramAuthToken: String
+}
+
 input ChangePasswordInput {
   newPassword: String!
   password: String!
@@ -132,6 +142,7 @@ type Mutation {
   changeEmail(data: ChangeEmailInput!): Boolean!
   changePassword(data: ChangePasswordInput!): Boolean!
   changeProfileInfo(data: ChangeProfileInfoInput!): Boolean!
+  changeSettings(data: ChangeNotificationSettingsInput!): ChangeNotificationSettingsResponse!
   changeStreamInfo(data: ChangeStreamInfoInput!): Boolean!
   changeStreamThumbnail(thumbnail: Upload!): Boolean!
   clearSessionCookie: Boolean!
@@ -164,9 +175,39 @@ input NewPasswordInput {
   token: String!
 }
 
+type NotificationModel {
+  createdAt: DateTime!
+  id: String!
+  isRead: Boolean!
+  message: String!
+  type: NotificationType!
+  updatedAt: DateTime!
+  user: UserModel!
+  userId: String!
+}
+
+type NotificationSettingsModel {
+  createdAt: DateTime!
+  id: String!
+  site: Boolean!
+  telegram: Boolean!
+  updatedAt: DateTime!
+  user: UserModel!
+  userId: String!
+}
+
+enum NotificationType {
+  CHANNEL_VERIFIED
+  ENABLE_TWO_FACTOR
+  NEW_FOLLOWER
+  NEW_SPONSORSHIP
+  STREAM_START
+}
+
 type Query {
   findAllCategories: [CategoryModel!]!
   findAllStreams(filters: FiltersInput!): [StreamModel!]!
+  findByUser: [NotificationModel!]!
   findCategoryBySlug(slug: String!): CategoryModel!
   findChannelByUsername(username: String!): UserModel!
   findCurrentSession: SessionModel!
@@ -180,6 +221,7 @@ type Query {
   findRecommendedChannels: [UserModel!]!
   findSessionByUser: [SessionModel!]!
   findSocialLinks: [SocialLinkModel!]!
+  findUnreadCount: Float!
   generateTotpKey: TotpModel!
 }
 
@@ -263,6 +305,8 @@ type UserModel {
   isActive: Boolean!
   isVerified: Boolean!
   name: String!
+  notificationSettings: [NotificationSettingsModel!]!
+  notifications: [NotificationModel!]!
   socialLinks: [SocialLinkModel!]
   stream: StreamModel
   telegramId: String!

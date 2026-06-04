@@ -25,6 +25,7 @@ import { CategoryModule } from '@/src/modules/category/category.module';
 import { ChatModule } from '@/src/modules/chat/chat.module';
 import { FollowModule } from '@/src/modules/follow/follow.module';
 import { ChannelModule } from '@/src/modules/channel/channel.module';
+import { NotificationModule } from '@/src/modules/notification/notification.module';
 
 @Module({
   imports: [
@@ -64,6 +65,7 @@ import { ChannelModule } from '@/src/modules/channel/channel.module';
     ChatModule,
     FollowModule,
     ChannelModule,
+    NotificationModule,
   ],
 })
 export class CoreModule {}

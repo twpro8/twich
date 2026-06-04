@@ -2,6 +2,8 @@ import { Field, ID, ObjectType } from '@nestjs/graphql';
 import { SocialLinkModel } from '@/src/modules/auth/profile/models/social-link.model';
 import { StreamModel } from '@/src/modules/stream/models/stream.model';
 import { FollowModel } from '@/src/modules/follow/models/follow.model';
+import { NotificationModel } from '@/src/modules/notification/models/notification.model';
+import { NotificationSettingsModel } from '@/src/modules/notification/models/notification-settings.model';
 
 @ObjectType()
 export class UserModel {
@@ -53,4 +55,10 @@ export class UserModel {
 
   @Field(() => [FollowModel])
   followings: FollowModel[];
+
+  @Field(() => [NotificationModel])
+  notifications: NotificationModel[];
+
+  @Field(() => [NotificationSettingsModel])
+  notificationSettings: NotificationSettingsModel;
 }

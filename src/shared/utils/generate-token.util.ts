@@ -35,7 +35,7 @@ export async function generateVerificationToken(
     });
   }
 
-  const newToken = await prismaService.token.create({
+  return prismaService.token.create({
     data: {
       token,
       type,
@@ -50,6 +50,4 @@ export async function generateVerificationToken(
       user: true,
     },
   });
-
-  return newToken;
 }
