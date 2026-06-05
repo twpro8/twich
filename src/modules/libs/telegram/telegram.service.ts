@@ -81,6 +81,34 @@ export class TelegramService extends Telegraf {
     await ctx.replyWithHTML(MESSAGES.profile(user), BUTTONS.profile);
   }
 
+  @Command('followings')
+  @Action('followings')
+  async onFollowings(@Ctx() ctx: Context) {
+    const chatId = ctx.chat?.id?.toString();
+
+    if (!chatId) {
+      throw new BadRequestException('Chat ID not found');
+    }
+
+    const user = await this.findUserByChatId(chatId);
+
+    const followings = await this.prismaService.follow.findMany({
+      where: { followerId: user.id },
+      include: { following: true },
+    });
+
+    if (!followings.length) {
+      await ctx.replyWithHTML('You do not have followings..');
+      return;
+    }
+
+    const followingsList = followings.map(f => f.following.username).join('\n');
+
+    const message = `<b> Channels you are subscribed: </b>\n\n${followingsList}`;
+
+    await ctx.replyWithHTML(message);
+  }
+
   private async connectTelegram(userId: string, chatId: string): Promise<void> {
     await this.prismaService.user.update({
       where: { id: userId },
