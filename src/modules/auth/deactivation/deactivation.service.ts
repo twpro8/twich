@@ -15,6 +15,7 @@ import { verify } from 'argon2';
 import type { Request } from 'express';
 import { MailService } from '../../libs/mail/mail.service';
 import { AccountDeactivationInput } from './inputs/account-deactivation.input';
+import { TelegramService } from '@/src/modules/libs/telegram/telegram.service';
 
 @Injectable()
 export class DeactivationService {
@@ -22,6 +23,7 @@ export class DeactivationService {
     private readonly prismaService: PrismaService,
     private readonly mailService: MailService,
     private readonly configService: ConfigService,
+    private readonly telegramService: TelegramService,
   ) {}
 
   async deactivateAccount(
@@ -106,6 +108,14 @@ export class DeactivationService {
       deactivationToken.token,
       metadata,
     );
+
+    if (user.telegram_id) {
+      await this.telegramService.sendDeactivationToken(
+        user.telegram_id,
+        deactivationToken.token,
+        metadata,
+      );
+    }
 
     return true;
   }

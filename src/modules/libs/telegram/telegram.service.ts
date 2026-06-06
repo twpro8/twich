@@ -122,6 +122,24 @@ export class TelegramService extends Telegraf {
     );
   }
 
+  async sendDeactivationToken(
+    chatId: string,
+    token: string,
+    metadata: SessionMetadata,
+  ) {
+    await this.telegram.sendMessage(
+      chatId,
+      MESSAGES.accountDeactivation(token, metadata),
+      { parse_mode: 'HTML' },
+    );
+  }
+
+  async sendAccountDeletedMessage(chatId: string) {
+    await this.telegram.sendMessage(chatId, MESSAGES.accountDeleted, {
+      parse_mode: 'HTML',
+    });
+  }
+
   private async connectTelegram(userId: string, chatId: string): Promise<void> {
     await this.prismaService.user.update({
       where: { id: userId },
