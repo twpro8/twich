@@ -12,12 +12,14 @@ import type { Request } from 'express';
 import { MailService } from '../../libs/mail/mail.service';
 import type { NewPasswordInput } from './inputs/new-password.input';
 import { ResetPasswordInput } from './inputs/reset-password.input';
+import { TelegramService } from '@/src/modules/libs/telegram/telegram.service';
 
 @Injectable()
 export class PasswordRecoveryService {
   constructor(
     private readonly prismaService: PrismaService,
     private readonly mailService: MailService,
+    private readonly telegramService: TelegramService,
   ) {}
 
   async resetPassword(
@@ -51,6 +53,14 @@ export class PasswordRecoveryService {
       resetToken.token,
       metadata,
     );
+
+    if (user.telegram_id) {
+      await this.telegramService.sendPasswordResetToken(
+        user.telegram_id,
+        resetToken.token,
+        metadata,
+      );
+    }
 
     return true;
   }

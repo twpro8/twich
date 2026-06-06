@@ -7,6 +7,7 @@ import { TokenType } from '@prisma/generated/enums';
 import { User } from '@prisma/generated/client';
 import { MESSAGES } from '@/src/modules/libs/telegram/telegram.message';
 import { BUTTONS } from '@/src/modules/libs/telegram/telegram.buttons';
+import type { SessionMetadata } from '@/src/shared/types/session-metadata.types';
 
 @Update()
 @Injectable()
@@ -107,6 +108,18 @@ export class TelegramService extends Telegraf {
     const message = `<b> Channels you are subscribed: </b>\n\n${followingsList}`;
 
     await ctx.replyWithHTML(message);
+  }
+
+  async sendPasswordResetToken(
+    chatId: string,
+    token: string,
+    metadata: SessionMetadata,
+  ) {
+    await this.telegram.sendMessage(
+      chatId,
+      MESSAGES.resetPassword(token, metadata),
+      { parse_mode: 'HTML' },
+    );
   }
 
   private async connectTelegram(userId: string, chatId: string): Promise<void> {
