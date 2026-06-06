@@ -110,6 +110,24 @@ export class TelegramService extends Telegraf {
     await ctx.replyWithHTML(message);
   }
 
+  async sendStreamStartedMessage(chatId: string, channel: User) {
+    await this.telegram.sendMessage(chatId, MESSAGES.streamStarted(channel), {
+      parse_mode: 'HTML',
+    });
+  }
+
+  async sendNewFollowerMessage(chatId: string, follower: User) {
+    const user = await this.findUserByChatId(chatId);
+
+    await this.telegram.sendMessage(
+      chatId,
+      MESSAGES.newFollower(follower, user.followings.length),
+      {
+        parse_mode: 'HTML',
+      },
+    );
+  }
+
   async sendPasswordResetToken(
     chatId: string,
     token: string,
@@ -150,6 +168,7 @@ export class TelegramService extends Telegraf {
   private async findUserByChatId(chatId: string) {
     const user = await this.prismaService.user.findUnique({
       where: { telegram_id: chatId },
+      include: { followings: true },
     });
 
     if (!user) {

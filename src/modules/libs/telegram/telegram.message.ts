@@ -101,4 +101,23 @@ With appreciation,
 
 <b>❤️ The Lumière Team</b>
 `,
+  newFollower: (
+    follower: User,
+    followersCount: number,
+  ) => ` <b>🎉 You Have a New Follower!</b>
+
+<a href="https://lumiere.com/${follower.username}">${follower.name}</a> has started following your channel.
+
+<b>👥 Total Followers:</b> ${followersCount}
+
+Keep creating great content and growing your community ❤️
+`,
+  streamStarted: (channel: User) => ` <b>🔴 ${channel.name} is LIVE!</b>
+
+The stream has just started.
+
+🎥 <a href="https://lumiere.com/${channel.username}">Watch Now</a>
+
+Don't miss it 🚀
+`,
 };

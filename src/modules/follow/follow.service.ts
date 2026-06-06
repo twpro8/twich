@@ -6,12 +6,14 @@ import {
 import { PrismaService } from '@/src/core/prisma/prisma.service';
 import { User } from '@prisma/generated/client';
 import { NotificationService } from '@/src/modules/notification/notification.service';
+import { TelegramService } from '@/src/modules/libs/telegram/telegram.service';
 
 @Injectable()
 export class FollowService {
   constructor(
     private readonly prismaService: PrismaService,
     private readonly notificationService: NotificationService,
+    private readonly telegramService: TelegramService,
   ) {}
 
   async findMyFollowers(user: User) {
@@ -84,6 +86,13 @@ export class FollowService {
       await this.notificationService.sendNewFollowerNotification(
         user,
         channelId,
+      );
+    }
+
+    if (channel.telegram_id) {
+      await this.telegramService.sendNewFollowerMessage(
+        channel.telegram_id,
+        user,
       );
     }
 
