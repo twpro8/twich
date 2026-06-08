@@ -76,6 +76,12 @@ type ChatMessageModel {
   userId: String!
 }
 
+input CreatePlanInput {
+  description: String
+  name: String!
+  price: Float!
+}
+
 input CreateUserInput {
   email: String!
   password: String!
@@ -147,6 +153,7 @@ type Mutation {
   changeStreamThumbnail(thumbnail: Upload!): Boolean!
   clearSessionCookie: Boolean!
   createIngress(ingressType: Float!): Boolean!
+  createPlan(input: CreatePlanInput!): Boolean!
   createSocialLink(data: SocialLinkInput!): Boolean!
   createUser(data: CreateUserInput!): Boolean!
   deactivateAccount(data: AccountDeactivationInput!): AuthResultModel!
@@ -159,6 +166,7 @@ type Mutation {
   logoutUser: Boolean!
   newPassword(data: NewPasswordInput!): Boolean!
   removeAvatar: Boolean!
+  removePlan(planId: String!): Boolean!
   removeSession(id: String!): Boolean!
   removeStreamThumbnail: Boolean!
   reorderSocialLinks(data: [ChangeSocialLinksOrderInput!]!): Boolean!
@@ -215,6 +223,7 @@ type Query {
   findMessagesByStream(streamId: String!): [ChatMessageModel!]!
   findMyFollowers: [FollowModel!]!
   findMyFollows: [FollowModel!]!
+  findMyPlans: [SponsorshipPlanModel!]!
   findProfile: UserModel!
   findRandomCategories: [CategoryModel!]!
   findRandomStreams: [StreamModel!]!
@@ -260,6 +269,19 @@ type SocialLinkModel {
   updatedAt: DateTime!
   url: String!
   userId: String!
+}
+
+type SponsorshipPlanModel {
+  channel: UserModel!
+  channelId: String!
+  createdAt: DateTime!
+  description: String
+  id: String!
+  name: String!
+  price: Float!
+  stripePlanId: String!
+  stripeProductId: String!
+  updatedAt: DateTime!
 }
 
 type StreamModel {
